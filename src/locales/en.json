@@ -1,0 +1,229 @@
+{
+  "common": {
+    "appName": "Pur Life Maroc",
+    "back": "Back",
+    "next": "Next",
+    "skip": "Skip",
+    "done": "Done",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "loading": "Loading...",
+    "error": "Error",
+    "retry": "Retry",
+    "close": "Close",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "view": "View",
+    "more": "More",
+    "less": "Less",
+    "language": "Language",
+    "settings": "Settings"
+  },
+  "navigation": {
+    "home": "Home",
+    "explore": "Explore",
+    "travelStyles": "Travel Styles",
+    "destinations": "Destinations",
+    "activities": "Activities",
+    "accommodation": "Stay",
+    "eatDrink": "Eat & Drink",
+    "concierge": "Concierge",
+    "favorites": "Favorites",
+    "enquiry": "Enquiry",
+    "insights": "Insights",
+    "chat": "Chat"
+  },
+  "splash": {
+    "welcome": "Welcome to",
+    "subtitle": "Luxury Moroccan Experiences"
+  },
+  "language": {
+    "selectLanguage": "Select Your Language",
+    "english": "English",
+    "german": "Deutsch"
+  },
+  "onboarding": {
+    "title": "Tell Us About You",
+    "subtitle": "Help us curate your perfect Morocco experience",
+    "step1": "What's your travel style?",
+    "step2": "What's your budget?",
+    "budget": {
+      "budget": "Budget-Friendly",
+      "mid": "Mid-Range",
+      "luxury": "Luxury"
+    },
+    "step3": "How long will you stay?",
+    "duration": {
+      "weekend": "Weekend (2-3 days)",
+      "week": "Week (4-7 days)",
+      "twoweeks": "Two Weeks (8-14 days)",
+      "month": "Month or More"
+    },
+    "step4": "What interests you?",
+    "step5": "Preferred destinations?",
+    "step6": "Accommodation style?",
+    "accommodation": {
+      "luxury": "Luxury Palaces",
+      "boutique": "Boutique Riads",
+      "camp": "Desert Camps",
+      "traditional": "Traditional Houses"
+    },
+    "confirm": "Create My Experience",
+    "skip": "Skip for now"
+  },
+  "home": {
+    "welcome": "Welcome back",
+    "recommendations": "Your Recommendations",
+    "getStarted": "Get Started",
+    "exploreCurated": "Explore Curated Experiences",
+    "myFavorites": "My Favorites",
+    "viewAll": "View All",
+    "quickLinks": "Quick Links",
+    "chatWithConcierge": "Chat with Concierge"
+  },
+  "travelStyle": {
+    "title": "Travel Styles",
+    "subtitle": "Choose your journey",
+    "selectStyle": "Select a travel style to begin",
+    "details": "Style Details"
+  },
+  "destinations": {
+    "title": "Destinations",
+    "subtitle": "Discover Morocco",
+    "selectDestination": "Choose a destination",
+    "highlights": "Highlights",
+    "bestSeason": "Best Season",
+    "explore": "Explore Destination"
+  },
+  "activities": {
+    "title": "Activities",
+    "subtitle": "Curated Experiences",
+    "noActivities": "No activities found",
+    "duration": "Duration",
+    "price": "Price",
+    "category": "Category",
+    "bookNow": "Add to Itinerary"
+  },
+  "accommodation": {
+    "title": "Where to Stay",
+    "subtitle": "Luxury & Comfort",
+    "luxury": "Luxury Palaces",
+    "boutique": "Boutique Riads",
+    "camp": "Desert Camps",
+    "traditional": "Traditional Houses",
+    "amenities": "Amenities",
+    "pricePerNight": "Per Night",
+    "selectRoom": "View Property"
+  },
+  "eatDrink": {
+    "title": "Eat & Drink",
+    "subtitle": "Moroccan Gastronomy",
+    "cuisine": "Cuisine",
+    "specialties": "Specialties",
+    "priceRange": "Price Range",
+    "reserve": "Make Reservation",
+    "noRestaurants": "No restaurants found"
+  },
+  "concierge": {
+    "title": "Private Concierge",
+    "subtitle": "Expert Local Guidance",
+    "headline": "24/7 Dedicated Service",
+    "description": "Our concierge team is available around the clock to assist you with any requests, special arrangements, or advice about your Moroccan journey.",
+    "services": [
+      "Personalized Itinerary Planning",
+      "Restaurant Reservations",
+      "Activity Bookings",
+      "Transportation Arrangement",
+      "Last-Minute Requests",
+      "Emergency Assistance"
+    ],
+    "cta": "Chat with Our Team",
+    "contactUs": "Contact Our Concierge"
+  },
+  "recommendations": {
+    "title": "Your Recommendations",
+    "subtitle": "Based on your preferences",
+    "destinations": "Suggested Destinations",
+    "activities": "Recommended Activities",
+    "accommodation": "Perfect Stay",
+    "explanation": "Why We Recommend These",
+    "customize": "Adjust Preferences",
+    "viewDetails": "View Details"
+  },
+  "chatbot": {
+    "title": "Concierge Chat",
+    "subtitle": "Ask anything about Morocco",
+    "placeholder": "Ask about travel styles, destinations, activities...",
+    "sendButton": "Send",
+    "noMessage": "Welcome! Ask me anything about Morocco.",
+    "typing": "Concierge is typing...",
+    "error": "Sorry, I couldn't respond. Try rewording your question."
+  },
+  "favorites": {
+    "title": "My Favorites",
+    "subtitle": "Saved Experiences",
+    "empty": "No favorites yet",
+    "addFavorite": "Save to favorites",
+    "removeFavorite": "Remove from favorites"
+  },
+  "enquiry": {
+    "title": "Plan Your Journey",
+    "subtitle": "Request Your Experience",
+    "yourDetails": "Your Details",
+    "name": "Full Name",
+    "email": "Email Address",
+    "phone": "Phone Number",
+    "travelDetails": "Travel Details",
+    "selectedDestinations": "Selected Destinations",
+    "startDate": "Preferred Start Date",
+    "duration": "Duration",
+    "budget": "Budget Range",
+    "specialRequests": "Special Requests",
+    "requestText": "Tell us what you'd like to experience...",
+    "submit": "Send Enquiry",
+    "submitSuccess": "Your enquiry has been sent!",
+    "submitError": "Please fill in all required fields",
+    "reviewBefore": "Review Your Enquiry"
+  },
+  "summary": {
+    "title": "Enquiry Summary",
+    "submitted": "Your enquiry has been submitted",
+    "confirmationMessage": "Thank you for your interest! Our team will review your request and contact you shortly.",
+    "reference": "Reference Number",
+    "emailSent": "A confirmation email has been sent to",
+    "whatNext": "What Happens Next",
+    "timeline": "You'll hear from us within 24-48 hours",
+    "backHome": "Back to Home",
+    "continueExploring": "Continue Exploring"
+  },
+  "insights": {
+    "title": "Insights & Trends",
+    "subtitle": "What's Popular Right Now",
+    "topTravelStyle": "Most Popular Travel Style",
+    "topDestination": "Most Explored Destination",
+    "topActivity": "Most Saved Activity",
+    "topAccommodation": "Most Liked Accommodation",
+    "trends": "Trending Experiences",
+    "based": "Based on user activity"
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "notifications": "Notifications",
+    "about": "About This App",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "help": "Help & Support",
+    "version": "Version",
+    "logout": "Logout"
+  },
+  "errors": {
+    "networkError": "Network error. Please check your connection.",
+    "loadingError": "Failed to load content. Please try again.",
+    "invalidInput": "Please enter valid information",
+    "emailInvalid": "Please enter a valid email address"
+  }
+}
