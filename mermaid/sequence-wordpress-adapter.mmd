@@ -1,0 +1,20 @@
+sequenceDiagram
+    autonumber
+    actor U as Voyageur
+    participant M as Mobile App
+    participant API as NestJS API
+    participant CS as ContentService
+    participant WP as WordPressContentProvider
+    participant WPR as WordPress REST API
+
+    U->>M: Ouvre la liste des destinations
+    M->>API: GET /content/destinations
+    API->>CS: getDestinations()
+    CS->>WP: getDestinations()
+    WP->>WPR: Request custom content / posts
+    WPR-->>WP: WordPress JSON response
+    WP->>WP: Mapper les champs WordPress vers DestinationDto
+    WP-->>CS: Liste normalisee des destinations
+    CS-->>API: DestinationDto[]
+    API-->>M: JSON normalise
+    M-->>U: Afficher les destinations

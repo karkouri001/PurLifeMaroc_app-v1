@@ -1,0 +1,633 @@
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+
+\documentclass[12pt,a4paper]{report}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage{textcomp}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{setspace}
+\usepackage{ragged2e}
+\usepackage{geometry}
+\usepackage{titlesec}
+\usepackage{bookmark}
+\usepackage{xurl}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{csquotes}
+\usepackage{caption}
+
+\geometry{
+  a4paper,
+  left=2.5cm,
+  right=2.5cm,
+  top=2.5cm,
+  bottom=2.5cm
+}
+
+\onehalfspacing
+\justifying
+
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+\setlength{\parindent}{1.2em}
+\setlength{\parskip}{0.4em}
+\setlength{\emergencystretch}{3em}
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{2pt}\setlength{\parskip}{0pt}
+}
+
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+
+\titleformat{\chapter}[display]
+  {\bfseries\Huge}
+  {\centering Chapitre \thechapter}
+  {0.5em}
+  {\centering}
+
+\titleformat{\section}
+  {\bfseries\Large}
+  {\thesection}
+  {0.8em}
+  {}
+
+\titleformat{\subsection}
+  {\bfseries\large}
+  {\thesubsection}
+  {0.8em}
+  {}
+
+\titleformat{\subsubsection}
+  {\bfseries\normalsize}
+  {\thesubsubsection}
+  {0.8em}
+  {}
+
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX}
+}
+
+\author{}
+\date{}
+
+% =========================
+% METADONNEES DU RAPPORT
+% =========================
+\newcommand{\SchoolName}{École Supérieure de Technologie d'Essaouira}
+\newcommand{\DepartmentName}{Département de Mathématiques et Informatique}
+\newcommand{\ProgramName}{Génie Informatique}
+\newcommand{\AcademicYear}{2025/2026}
+\newcommand{\AuthorName}{Abdessamad KARKOURI}
+\newcommand{\SupervisorOne}{Mme.\ Naima AZAROUAL}
+\newcommand{\SupervisorTwo}{M.\ Luca HOCHSCHWARZER}
+\newcommand{\ReportTitle}{Conception et développement d'une application mobile de conciergerie touristique pour Pur Life Maroc}
+\newcommand{\ShortProjectName}{Pur Life Maroc}
+
+% =========================
+% MACROS POUR IMAGES SURES
+% =========================
+\newcommand{\safeincludegraphics}[2][]{%
+  \IfFileExists{#2}{%
+    \includegraphics[#1]{#2}%
+  }{%
+    \fbox{%
+      \parbox[c][5cm][c]{0.8\linewidth}{%
+        \centering
+        Illustration non fournie\\[0.2cm]
+        \texttt{#2}
+      }%
+    }%
+  }%
+}
+
+\newcommand{\reportfigure}[3][]{%
+  \begin{figure}[H]
+    \centering
+    \safeincludegraphics[#1]{#2}
+    \caption*{#3}
+    \addcontentsline{lof}{figure}{#3}
+  \end{figure}
+}
+
+\begin{document}
+
+% =========================
+% PAGE DE GARDE
+% =========================
+\begin{titlepage}
+    \centering
+    \thispagestyle{empty}
+
+    \noindent
+    \begin{minipage}[t]{0.56\textwidth}
+        \raggedright
+        \safeincludegraphics[width=0.9\textwidth,keepaspectratio]{media/este_logo.png}
+    \end{minipage}
+    \hspace{1.5cm}
+    \begin{minipage}[t]{0.22\textwidth}
+        \centering
+        \safeincludegraphics[width=\textwidth,height=3.2cm,keepaspectratio]{media/plm_logo.png}
+    \end{minipage}
+
+    \vspace{0.8cm}
+
+    {\normalsize\bfseries \DepartmentName\par}
+    \vspace{1.5cm}
+
+    {\LARGE\bfseries Rapport de Stage de Fin d'Études\par}
+    \vspace{1cm}
+
+    {\large Filière :\par}
+    {\Large\bfseries \ProgramName\par}
+    \vspace{1.3cm}
+
+    {\large\bfseries Sujet :\par}
+    \vspace{0.5cm}
+
+    \fbox{
+    \parbox{0.85\textwidth}{
+        \centering
+        \vspace{0.3cm}
+        {\LARGE\bfseries Conception et développement d'une application mobile\\[0.2cm] de conciergerie touristique pour Pur Life Maroc\par}
+        \vspace{0.3cm}
+    }
+    }
+
+    \vspace{1.3cm}
+
+    {\large\bfseries Année universitaire : \AcademicYear\par}
+    \vspace{2cm}
+
+    \noindent
+    \begin{minipage}[t]{0.45\textwidth}
+        \raggedright
+        \textbf{Réalisé par :}\\[0.4cm]
+        \AuthorName\\
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.45\textwidth}
+        \raggedleft
+        \textbf{Encadré par :}\\[0.4cm]
+        \SupervisorOne\ et\\
+        \SupervisorTwo
+    \end{minipage}
+
+    \vfill
+\end{titlepage}
+
+% =========================
+% RESUME
+% =========================
+\chapter*{Résumé}
+\addcontentsline{toc}{chapter}{Résumé}
+
+Dans le cadre de ce projet de fin d'études, j'ai réalisé une application mobile dédiée à la conciergerie touristique haut de gamme au Maroc pour la marque \ShortProjectName. L'objectif principal était de concevoir une première version mobile capable de présenter l'offre de la marque, de guider l'utilisateur dans la découverte des destinations et de structurer un parcours de conciergerie digital cohérent.
+
+Le projet a été développé avec React Native et Expo, en s'appuyant sur TypeScript pour mieux structurer les données et renforcer la fiabilité du code. L'application intègre un parcours utilisateur complet incluant un écran de lancement, une sélection de langue, un onboarding en plusieurs étapes, des listes de destinations, d'activités et d'hébergements, un système de favoris, un moteur de recommandation fondé sur des règles claires, un estimateur de budget et un chatbot local basé sur une base de connaissances.
+
+L'approche retenue repose volontairement sur des données locales et des règles déterministes. Le moteur de recommandation ne dépend d'aucun service d'intelligence artificielle externe, ce qui facilite sa compréhension et son analyse. De la même manière, le chatbot a été conçu sous forme de logique locale par mots-clés afin de rester robuste, simple à décrire et facile à faire évoluer.
+
+Le résultat obtenu est une application mobile fonctionnelle, modulaire et cohérente, qui peut servir de base à une future évolution vers une plateforme connectée à un backend réel, un CRM ou des services de réservation.
+
+\vspace{0.5cm}
+\noindent \textbf{Mots-clés :} application mobile, conciergerie touristique, React Native, Expo, recommandation, chatbot local, AsyncStorage, prototype.
+
+% =========================
+% REMERCIEMENTS
+% =========================
+\chapter*{Remerciements}
+\addcontentsline{toc}{chapter}{Remerciements}
+
+J'adresse mes sincères remerciements à mes encadrants, \SupervisorOne\ et \SupervisorTwo, pour leur accompagnement, leurs conseils et leur disponibilité tout au long de la réalisation de ce projet.
+
+Je remercie également l'ensemble des enseignants de \SchoolName\ pour la qualité de la formation reçue au sein de la filière \ProgramName, qui m'a permis d'acquérir les bases nécessaires à la conception et au développement de cette application.
+
+Enfin, je remercie ma famille et mes proches pour leur soutien moral et leurs encouragements durant toute cette période.
+
+% =========================
+% TABLE DES MATIERES
+% =========================
+\tableofcontents
+\newpage
+\listoffigures
+\newpage
+
+% =========================
+% INTRODUCTION GENERALE
+% =========================
+\chapter*{Introduction générale}
+\addcontentsline{toc}{chapter}{Introduction générale}
+
+Dans le secteur du tourisme haut de gamme, l'expérience numérique joue un rôle de plus en plus important dès les premières interactions avec la marque. Avant même toute réservation, le voyageur attend une présentation claire des destinations, des activités, des hébergements et des services personnalisés proposés.
+
+Dans ce contexte, le projet \ShortProjectName\ consiste à concevoir une application mobile de conciergerie touristique. L'idée n'était pas de construire immédiatement une plateforme connectée à des services réels, mais de développer un prototype mobile cohérent, capable de couvrir un parcours utilisateur complet.
+
+Le projet s'appuie sur React Native et Expo afin de proposer une application multiplateforme, tout en intégrant plusieurs briques importantes : gestion d'état globale, persistance locale, internationalisation, moteur de recommandation fondé sur des règles claires, estimateur de budget et chatbot local.
+
+Ce rapport présente d'abord le contexte du projet et la problématique traitée. Il détaille ensuite l'analyse fonctionnelle et la conception générale de l'application, avant de décrire la réalisation technique, les choix d'architecture, les résultats obtenus ainsi que les limites actuelles du projet.
+
+% =========================
+% CHAPITRE 1
+% =========================
+\chapter{Contexte général et problématique}
+
+Le tourisme premium ne repose pas uniquement sur la qualité des prestations sur le terrain. Il dépend aussi de la manière dont la marque présente son univers, rassure le client et simplifie les premières étapes de son parcours. Dans ce cadre, une application mobile peut jouer un rôle important pour centraliser l'information, structurer l'expérience et renforcer la perception de qualité.
+
+\section{Contexte du projet}
+
+\ShortProjectName\ est une application mobile de conciergerie touristique orientée vers le voyage haut de gamme au Maroc. L'application met en avant plusieurs dimensions de l'offre : styles de voyage, destinations, activités, hébergements, restauration, accompagnement concierge et demande de voyage.
+
+L'objectif n'était pas de livrer une plateforme commerciale complète avec paiements, disponibilités en temps réel et back-office connecté, mais de proposer une application fonctionnelle permettant de présenter clairement le service dans le cadre d'un stage de fin d'études.
+
+\section{Problématique}
+
+La problématique principale de ce projet peut être formulée comme suit :
+
+\begin{quote}
+Comment concevoir une application mobile simple, élégante et évolutive capable de présenter une offre touristique premium, de personnaliser l'exploration de contenu et de simuler une expérience de conciergerie digitale, tout en restant réalisable dans le cadre d'un projet de fin d'études ?
+\end{quote}
+
+Au départ, plusieurs contraintes étaient identifiées. Il fallait proposer une navigation claire malgré un nombre important d'écrans, maintenir une cohérence entre le design, les données mockées et les traductions, mettre en place une logique de recommandation crédible sans recourir à une intelligence artificielle complexe, et concevoir un chatbot utile sans dépendance à une API externe.
+
+\section{Solution proposée}
+
+Pour répondre à cette problématique, j'ai développé une application mobile bilingue reposant sur React Native et Expo. La solution proposée structure le parcours utilisateur autour de plusieurs étapes : découverte de la marque, sélection de langue, onboarding, consultation du catalogue de contenu, recommandations personnalisées, sauvegarde de favoris, discussion avec un assistant local et envoi d'une demande de voyage.
+
+Le choix d'une architecture modulaire et de services métier fondés sur des règles claires a permis d'obtenir une solution lisible, cohérente et techniquement maîtrisée. Cette orientation reste adaptée au périmètre du projet tout en évitant une complexité inutile.
+
+\section{Objectifs du projet}
+
+Les objectifs principaux du projet sont les suivants :
+
+\begin{itemize}
+\item analyser le besoin fonctionnel d'une application mobile de conciergerie touristique ;
+\item concevoir une architecture claire séparant l'interface, l'état global, les données et la logique métier ;
+\item développer une interface moderne, bilingue et cohérente sur mobile ;
+\item proposer un moteur de recommandation simple, fondé sur des règles claires et directement lié aux préférences de l'utilisateur ;
+\item intégrer un chatbot local capable de répondre à des questions fréquentes sans recourir à une API externe ;
+\item assurer la persistance locale des préférences, favoris, demandes et paramètres utilisateur ;
+\item produire une base de code maintenable, testable et prête à évoluer vers une version connectée à des services réels.
+\end{itemize}
+
+\section{Périmètre du projet}
+
+Le périmètre retenu couvre les fonctionnalités effectivement implémentées dans l'application. Celles-ci incluent notamment un écran de lancement, la sélection de langue, un onboarding en six étapes, un catalogue de styles de voyage, des destinations, des activités, des hébergements, un écran \textit{Eat \& Drink}, un écran \textit{Insights}, un système de favoris, un planificateur de voyage, un estimateur de budget, un moteur de recommandation, un chatbot local et un flux d'enquiry par email.
+
+En revanche, certaines capacités habituellement présentes dans un produit final n'ont pas été intégrées à ce stade, comme une authentification réelle, un backend connecté, un moteur de réservation, un paiement en ligne ou une base de données distante. Ce choix est volontaire et correspond au périmètre retenu pour cette première version.
+
+\section*{Conclusion}
+
+Ce premier chapitre a présenté le contexte général du projet, la problématique traitée ainsi que les objectifs fixés. Le chapitre suivant détaille l'analyse des besoins, la conception générale de l'application et les choix fonctionnels qui ont guidé le développement.
+
+% =========================
+% CHAPITRE 2
+% =========================
+\chapter{Analyse et conception}
+
+Avant de commencer le développement, il était nécessaire de définir précisément le périmètre fonctionnel, les acteurs concernés, les flux utilisateurs et l'organisation technique du projet. Cette phase a permis de structurer l'application de manière cohérente et d'éviter une accumulation désordonnée de fonctionnalités.
+
+\section{Acteurs du système}
+
+Même si l'application ne gère pas encore une authentification complète ni des rôles serveur, trois acteurs principaux peuvent être distingués dans le cadre du projet :
+
+\begin{itemize}
+\item le \textbf{voyageur}, qui explore les destinations, activités, hébergements et services, reçoit des recommandations, sauvegarde ses favoris et envoie une demande de voyage ;
+\item l'\textbf{équipe Pur Life Maroc}, qui est représentée dans l'application à travers le positionnement de marque, les services proposés, les profils de chauffeurs, les itinéraires et les informations de contact ;
+\item le \textbf{développeur ou futur administrateur métier}, qui pourra à terme enrichir les données, brancher un backend, ajouter des intégrations réelles et faire évoluer l'application vers une version de production.
+\end{itemize}
+
+\section{Besoins fonctionnels}
+
+Les besoins fonctionnels principaux identifiés pour ce projet sont les suivants :
+
+\begin{itemize}
+\item permettre à l'utilisateur de choisir et mémoriser sa langue ;
+\item collecter les préférences de voyage via un onboarding structuré ;
+\item présenter les styles de voyage, destinations, activités, hébergements et options de restauration ;
+\item fournir des écrans de détail permettant d'explorer chaque contenu ;
+\item permettre l'ajout et la suppression de favoris ;
+\item générer des recommandations personnalisées à partir des préférences stockées ;
+\item construire un plan de voyage simple et produire une estimation budgétaire ;
+\item proposer un chatbot local capable de répondre aux questions fréquentes ;
+\item enregistrer localement les demandes de voyage et préparer un email d'enquiry ;
+\item offrir un écran de paramètres pour la langue et certains choix d'interface.
+\end{itemize}
+
+\section{Besoins non fonctionnels}
+
+Les besoins non fonctionnels retenus sont les suivants :
+
+\begin{itemize}
+\item garder une architecture modulaire et lisible ;
+\item assurer une cohérence visuelle à travers un thème centralisé ;
+\item supporter plusieurs tailles d'écran dans une logique mobile first ;
+\item garantir une bonne maintenabilité du code grâce à TypeScript ;
+\item éviter les dépendances inutiles à des services externes dans le périmètre retenu ;
+\item assurer une persistance locale fiable des données importantes ;
+\item proposer une logique métier claire, cohérente et facile à analyser.
+\end{itemize}
+
+\section{Architecture générale du projet}
+
+L'architecture du projet a été organisée pour séparer clairement l'interface, l'état global, les données et les services métier.
+
+Le dossier \texttt{app/} contient les écrans et la navigation basée sur \texttt{expo-router}. Le dossier \texttt{src/components/} regroupe les composants réutilisables comme les cartes, les boutons, les entêtes et les bannières. Les données métier mockées sont centralisées dans \texttt{src/data/}. La logique de recommandation, de chatbot et d'estimation budgétaire est isolée dans \texttt{src/services/}. L'état global et la persistance sont gérés dans \texttt{src/store/AppContext.tsx}. Enfin, \texttt{src/locales/} contient les traductions et \texttt{src/theme/} centralise le système visuel.
+
+\reportfigure[width=0.9\textwidth]{media/architecture-mobile.png}{Schéma général de l'architecture modulaire de l'application mobile}
+
+\section{Architecture cible du système}
+
+L'application actuellement réalisée repose sur une logique locale côté mobile. Afin de préparer une évolution réaliste vers un environnement plus proche d'un contexte professionnel, une architecture cible backend a également été retenue.
+
+Cette architecture cible s'appuie sur \texttt{NestJS} pour l'API, \texttt{PostgreSQL} pour la persistance, \texttt{Prisma} pour la gestion du schéma et l'accès aux données, \texttt{Swagger} pour la documentation des endpoints et \texttt{Docker} pour l'exécution de l'environnement. L'intégration future du contenu de l'entreprise est prévue à travers un adaptateur \texttt{WordPress REST API}.
+
+Le principe retenu est de faire dialoguer l'application mobile uniquement avec une API interne stable. Cette API pourra utiliser dans un premier temps des données mockées, puis basculer plus tard vers WordPress sans imposer de refonte du frontend mobile.
+
+\reportfigure[width=0.95\textwidth]{media/uml/architecture-target.png}{Architecture cible intégrant NestJS, PostgreSQL, Prisma, Swagger, Docker et un adaptateur WordPress}
+
+\section{Navigation et flux utilisateur}
+
+Le flux principal de l'application se déroule en plusieurs étapes successives. L'utilisateur arrive d'abord sur un écran de lancement, sélectionne ensuite sa langue, puis passe par un onboarding en plusieurs étapes pour renseigner ses préférences de voyage. Une fois ce parcours terminé, il accède à l'application principale organisée autour d'onglets : accueil, exploration, favoris, concierge et paramètres.
+
+Depuis ces onglets, il peut ouvrir les écrans de détail, consulter des routes et des profils, discuter avec le chatbot, construire une demande de voyage ou accéder aux recommandations générées à partir de ses préférences.
+
+\reportfigure[width=0.9\textwidth]{media/navigation-flow.png}{Flux principal de navigation de l'application}
+
+\section{Modèle logique des données}
+
+L'application repose sur plusieurs structures de données essentielles. Le type \texttt{UserPreferences} stocke les préférences utilisateur, comme le style de voyage, la durée, le budget, les centres d'intérêt et les destinations préférées. Le type \texttt{Favorite} représente les éléments sauvegardés. Le type \texttt{TripPlanItem} stocke les éléments intégrés dans le planificateur de voyage. Le type \texttt{Enquiry} représente les demandes de voyage générées par l'utilisateur.
+
+Les données de contenu sont fournies localement via des objets et tableaux structurés : destinations, activités, hébergements, restaurants, styles de voyage, itinéraires, profils de chauffeurs et informations d'entreprise. Ce modèle local a été choisi pour garder le projet simple, autonome et démontrable sans backend.
+
+\section{Conception du moteur de recommandation}
+
+Le moteur de recommandation a été conçu comme un service déterministe fondé sur des règles explicites. Son objectif n'est pas de prédire le comportement d'un utilisateur à partir d'un grand volume de données, mais de produire des recommandations cohérentes à partir de règles métier lisibles.
+
+Le service \texttt{RecommendationEngine} applique d'abord un score aux destinations selon plusieurs critères : destinations explicitement préférées, affinité avec le style de voyage, correspondance avec les centres d'intérêt et adaptation à la durée du séjour. Ensuite, il filtre les activités à partir des destinations retenues et priorise certaines catégories selon le style sélectionné. Enfin, il évalue les hébergements en fonction du budget, de la catégorie souhaitée et du contexte du séjour.
+
+Cette approche offre plusieurs avantages : elle est simple à maintenir, facile à déboguer et compréhensible lors de l'analyse du fonctionnement de l'application.
+
+\section{Conception de l'estimateur de budget}
+
+L'estimateur de budget complète la recommandation en donnant une fourchette de coût indicative. Le service \texttt{BudgetEstimator} combine plusieurs lignes d'estimation : hébergement, expériences, restauration et transport. Lorsque l'utilisateur a déjà planifié certains éléments, les plages de prix de ces éléments sont utilisées directement. Sinon, le système applique des valeurs de repli calculées selon le budget général, les préférences d'hébergement, le nombre de voyageurs et le nombre de nuits.
+
+Cette logique donne un résultat cohérent sans dépendre d'une base tarifaire externe ou de services temps réel. Elle renforce la crédibilité du parcours utilisateur tout en restant compatible avec l'organisation locale des données.
+
+\section{Conception du chatbot local}
+
+Le chatbot a été implémenté sous forme de base de connaissances locale. Le service \texttt{ChatbotService} commence par normaliser les messages utilisateur, puis recherche des mots-clés ou des contenus reconnus dans différentes catégories : marque, services, experts, contact, destinations, activités, hébergements, restauration, chauffeurs et itinéraires.
+
+Lorsqu'une catégorie est détectée, le service construit une réponse à partir des données locales du projet. Cette stratégie a été retenue pour éviter la dépendance à une API d'intelligence artificielle externe, réduire la complexité technique et garantir des réponses stables dans l'application.
+
+\section{Persistance et gestion d'état}
+
+Le composant \texttt{AppContext} centralise l'état global de l'application. Il prend en charge les préférences, les favoris, le plan de voyage, les demandes, la langue et certains paramètres d'interface. Ces données sont chargées et sauvegardées via \texttt{AsyncStorage}, ce qui permet de restaurer automatiquement l'état utilisateur lors des relances de l'application.
+
+Cette organisation simplifie le passage de données entre les écrans et évite la duplication de logique. Elle constitue une base saine pour une évolution future vers un store plus sophistiqué ou vers une synchronisation distante.
+
+\section{Modélisation UML}
+
+Pour compléter la phase de conception, j'intègre une modélisation UML permettant de représenter les interactions principales du système, l'organisation des entités métier ainsi que certains scénarios clés du fonctionnement de l'application.
+
+\subsection{Diagramme de cas d'utilisation}
+
+Le diagramme de cas d'utilisation permet de visualiser les principales actions offertes à l'utilisateur dans l'application. Il met en évidence les fonctionnalités essentielles, comme la sélection de langue, la consultation du contenu, l'ajout aux favoris, la demande de voyage, la consultation des recommandations et l'utilisation du chatbot.
+
+\reportfigure[width=0.9\textwidth]{media/uml/usecase-diagram.png}{Diagramme de cas d'utilisation de l'application \ShortProjectName}
+
+\subsection{Diagramme de classes}
+
+Le diagramme de classes permet de représenter les principales structures de données manipulées dans le projet. Il peut inclure notamment les types liés aux préférences utilisateur, aux destinations, aux activités, aux hébergements, aux favoris, au plan de voyage et aux demandes.
+
+\reportfigure[width=0.95\textwidth]{media/uml/class-diagram.png}{Diagramme de classes représentant les principales entités du projet}
+
+\subsection{Diagrammes de séquence}
+
+Les diagrammes de séquence permettent de détailler le déroulement chronologique de certains scénarios importants. Dans ce projet, deux scénarios sont particulièrement pertinents dans l'état actuel de l'application : la génération des recommandations à partir des préférences utilisateur, et le traitement d'une demande de voyage jusqu'à l'ouverture du flux email. Des scénarios cibles ont également été préparés pour l'intégration future avec le backend et WordPress.
+
+\reportfigure[width=0.95\textwidth]{media/uml/sequence-recommendation.png}{Diagramme de séquence du processus de recommandation}
+
+\reportfigure[width=0.95\textwidth]{media/uml/sequence-enquiry.png}{Diagramme de séquence du processus d'enquiry}
+
+\reportfigure[width=0.95\textwidth]{media/uml/sequence-wordpress-adapter.png}{Diagramme de séquence de récupération du contenu via l'adaptateur WordPress}
+
+\reportfigure[width=0.95\textwidth]{media/uml/sequence-enquiry-api.png}{Diagramme de séquence du traitement d'une demande de voyage via l'API backend}
+
+\subsection{Intérêt de la modélisation}
+
+L'utilisation de diagrammes UML dans ce projet permet de formaliser la phase de conception, de clarifier les responsabilités des différents éléments du système et de mieux représenter la structure générale de l'application. Ces diagrammes servent également de support pour relier les choix de conception au code effectivement développé.
+
+Dans cette logique, la modélisation ne décrit pas uniquement l'application déjà réalisée. Elle sert aussi à préparer proprement l'évolution vers l'architecture cible choisie, notamment l'ajout d'un backend intermédiaire et l'intégration future du contenu WordPress.
+
+\section*{Conclusion}
+
+Ce chapitre a présenté les besoins fonctionnels et non fonctionnels, l'architecture générale, les flux principaux ainsi que la logique de conception des services métier. Le chapitre suivant détaille la réalisation technique effective de l'application et les résultats obtenus.
+
+% =========================
+% CHAPITRE 3
+% =========================
+\chapter{Réalisation et développement}
+
+Ce chapitre présente la mise en œuvre concrète du projet. L'objectif était de développer une application mobile fonctionnelle, visuellement cohérente et techniquement claire, tout en gardant un niveau de complexité adapté à un projet académique de fin d'études.
+
+\section{Environnement technique}
+
+Le projet a été développé avec React Native et Expo afin de cibler plusieurs plateformes à partir d'une base de code unique. TypeScript a été utilisé pour structurer les types, sécuriser les échanges de données et limiter les incohérences au moment du développement. La navigation repose sur \texttt{expo-router}, la persistance locale sur \texttt{AsyncStorage} et l'internationalisation sur \texttt{i18next} et \texttt{react-i18next}.
+
+L'environnement de travail a été organisé autour de Visual Studio Code, Git et npm. Cette base technique permet une bonne productivité tout en restant simple à présenter et à maintenir.
+
+\section{Outils et technologies utilisés}
+
+Le développement du projet s'est appuyé sur un ensemble d'outils et de technologies choisis pour leur simplicité d'intégration, leur fiabilité et leur adéquation avec une application mobile multiplateforme.
+
+\reportfigure[height=1.3cm]{media/icons/react-native.png}{\textbf{React Native} : framework principal utilisé pour développer l'interface mobile de l'application à partir d'une base de code unique.}
+
+\reportfigure[height=1.3cm]{media/icons/expo.png}{\textbf{Expo} : environnement utilisé pour accélérer la configuration du projet, le lancement de l'application et les tests sur différents supports.}
+
+\reportfigure[height=1.3cm]{media/icons/typescript.png}{\textbf{TypeScript} : langage utilisé pour renforcer le typage du code, mieux structurer les données et réduire les erreurs pendant le développement.}
+
+\reportfigure[height=1.3cm]{media/icons/expo-router.png}{\textbf{Expo Router} : solution de navigation utilisée pour organiser les écrans de l'application et structurer les parcours utilisateur.}
+
+\reportfigure[height=1.3cm]{media/icons/asyncstorage.png}{\textbf{AsyncStorage} : mécanisme de persistance locale utilisé pour conserver la langue, les préférences, les favoris, les demandes et les paramètres de l'utilisateur.}
+
+\reportfigure[height=1.3cm]{media/icons/i18next.png}{\textbf{i18next et react-i18next} : bibliothèques utilisées pour gérer le multilingue et permettre le changement de langue dans l'application.}
+
+\reportfigure[height=1.3cm]{media/icons/vscode.png}{\textbf{Visual Studio Code} : environnement de développement utilisé pour l'écriture, l'organisation et la maintenance du code source.}
+
+\reportfigure[height=1.3cm]{media/icons/git.png}{\textbf{Git} : outil de gestion de versions utilisé pour suivre les modifications du projet au cours du développement.}
+
+\reportfigure[height=1.3cm]{media/icons/github.png}{\textbf{GitHub} : plateforme utilisée pour l'hébergement du dépôt du projet et le suivi des versions du code.}
+
+\reportfigure[height=1.3cm]{media/icons/eslint.png}{\textbf{ESLint} : outil utilisé pour vérifier la qualité statique du code et repérer certaines incohérences de développement.}
+
+\section{Organisation du code source}
+
+Le code source suit une organisation modulaire. Les écrans sont répartis dans \texttt{app/}, avec une distinction claire entre écrans principaux et navigation par onglets. Les composants réutilisables sont centralisés dans \texttt{src/components/}. Les données métier mockées sont regroupées dans \texttt{src/data/}. Les services métier sont isolés dans \texttt{src/services/}. Les types TypeScript sont définis dans \texttt{src/types/}, tandis que \texttt{src/store/} gère l'état global de l'application.
+
+Cette organisation facilite l'évolution future du projet, car chaque responsabilité est localisée dans un espace technique identifiable.
+
+\section{Implémentation de l'interface mobile}
+
+L'interface a été conçue autour d'un thème visuel centralisé. Le fichier \texttt{src/theme/theme.ts} définit les couleurs, les espacements, la typographie, les ombres et les rayons de bordure. Ce choix permet de garder une cohérence visuelle sur l'ensemble des écrans et de simplifier les ajustements globaux.
+
+Des composants réutilisables comme les boutons, cartes, badges, entêtes et bannières ont ensuite été construits dans \texttt{src/components/Common.tsx}. Cette couche de composants limite la duplication et améliore la régularité de l'interface.
+
+La navigation principale s'appuie sur des onglets donnant accès à l'accueil, à l'exploration, aux favoris, à la partie concierge et aux paramètres. Cette structure rend l'application lisible et permet un parcours utilisateur simple.
+
+\section{Implémentation du moteur de recommandation}
+
+Le moteur de recommandation a été implémenté dans \texttt{src/services/RecommendationEngine.ts}. La logique repose sur des tables de correspondance entre styles de voyage, centres d'intérêt, destinations et catégories d'activités.
+
+Le service calcule d'abord un score de destination à partir de plusieurs facteurs : destinations préférées, style de voyage, centres d'intérêt et durée du séjour. Il sélectionne ensuite les meilleures destinations, filtre les activités liées à ces destinations et recherche les hébergements compatibles avec le budget et la préférence d'hébergement. Enfin, il produit une explication textuelle justifiant les recommandations proposées.
+
+Ce choix présente un avantage important : la recommandation reste transparente. Il est possible d'expliquer clairement pourquoi un résultat a été proposé, ce qui est beaucoup plus défendable qu'une logique opaque dans le cadre d'un PFE.
+
+\section{Implémentation de l'estimateur de budget}
+
+L'estimation budgétaire a été intégrée dans \texttt{src/services/BudgetEstimator.ts}. Le service calcule une fourchette minimale et maximale à partir du nombre de voyageurs, du nombre de nuits, de l'inclusion ou non d'un chauffeur, du rythme de restauration et du contenu déjà présent dans le plan de voyage.
+
+Lorsque certaines données tarifaires sont explicitement présentes dans les éléments planifiés, elles sont utilisées directement. Sinon, des plages de repli sont appliquées selon les préférences utilisateur. Le résultat final est présenté sous forme de lignes budgétaires détaillées, ce qui renforce la lisibilité pour l'utilisateur.
+
+\section{Implémentation du chatbot local}
+
+Le chatbot est implémenté dans \texttt{src/services/ChatbotService.ts}. Le service analyse le texte saisi, le normalise, puis détecte des intentions à partir de mots-clés et de correspondances avec les contenus disponibles dans l'application.
+
+Il peut ainsi répondre à plusieurs catégories de questions : présentation de la marque, services proposés, experts, contacts, processus d'envoi d'email, destinations, activités, hébergements, restauration, chauffeurs et itinéraires. Les réponses sont générées à partir de données locales présentes dans les fichiers métiers du projet.
+
+Cette approche rend le chatbot robuste dans un contexte de démonstration. Elle évite les coûts et l'instabilité d'une intégration externe tout en montrant une logique d'assistance pertinente.
+
+\section{Gestion d'état et persistance locale}
+
+L'état global est géré via \texttt{AppContext}. Au démarrage de l'application, les données sauvegardées dans \texttt{AsyncStorage} sont relues afin de restaurer la langue, les préférences, les favoris, le plan de voyage, les demandes et certains paramètres d'interface.
+
+Cette persistance locale joue un rôle important dans la qualité perçue du prototype. L'utilisateur peut reprendre son parcours sans recommencer les étapes déjà effectuées, ce qui rapproche l'expérience d'un produit réel.
+
+\section{Internationalisation}
+
+L'application est bilingue en anglais et en allemand. Les traductions sont centralisées dans les fichiers \texttt{src/locales/en.json} et \texttt{src/locales/de.json}, tandis que la configuration i18n est gérée dans \texttt{src/locales/i18n.ts}.
+
+Le choix du multilingue répond à un besoin fonctionnel cohérent avec le positionnement touristique international de la marque. Il montre également la capacité du projet à supporter une montée en charge fonctionnelle sans modification majeure de l'architecture.
+
+\section{Captures et écrans principaux}
+
+Les écrans les plus importants à présenter dans le rapport sont l'écran de lancement, la sélection de langue, l'onboarding, l'accueil, l'exploration, les recommandations, le chatbot et l'écran d'enquiry. Les figures suivantes peuvent être remplacées par les captures réelles de l'application.
+
+\reportfigure[width=0.35\textwidth]{media/splash-screen.png}{Écran de lancement de l'application}
+
+\reportfigure[width=0.35\textwidth]{media/language-select.png}{Écran de sélection de langue}
+
+\reportfigure[width=0.35\textwidth]{media/onboarding-screen.png}{Onboarding de collecte des préférences utilisateur}
+
+\reportfigure[width=0.35\textwidth]{media/home-screen.png}{Écran d'accueil avec accès rapide aux contenus principaux}
+
+\reportfigure[width=0.35\textwidth]{media/explore-screen.png}{Écran d'exploration des catégories de voyage}
+
+\reportfigure[width=0.35\textwidth]{media/recommendations-screen.png}{Écran de recommandations personnalisées}
+
+\reportfigure[width=0.35\textwidth]{media/chatbot-screen.png}{Interface du chatbot local de conciergerie}
+
+\reportfigure[width=0.35\textwidth]{media/enquiry-screen.png}{Formulaire de demande de voyage}
+
+\section{Validation et vérification}
+
+La vérification technique du projet a reposé sur plusieurs contrôles. Le lint a été exécuté avec \texttt{npm run lint} et la vérification de typage avec \texttt{npx tsc --noEmit}. Ces vérifications ont permis de corriger des incohérences de navigation, certains problèmes de props dans les styles et plusieurs détails de typage TypeScript.
+
+En complément, une validation manuelle a été effectuée sur les écrans principaux afin de vérifier la cohérence du parcours utilisateur, le bon fonctionnement du multilingue, la persistance locale, l'enchaînement des écrans et la qualité globale de l'affichage sur mobile.
+
+\section{Limites du projet}
+
+Malgré sa cohérence, le projet présente plusieurs limites assumées :
+
+\begin{itemize}
+\item l'application repose sur des données mockées et non sur un backend réel ;
+\item il n'existe pas encore d'authentification utilisateur ou de gestion de profils distants ;
+\item le chatbot ne repose pas sur un moteur conversationnel distant ;
+\item le flux d'enquiry prépare un email mais n'assure pas un suivi CRM complet ;
+\item les modules \textit{Eat \& Drink} et \textit{Insights} restent fondés sur des données de démonstration ;
+\item aucun système de paiement ou de réservation temps réel n'a été intégré.
+\end{itemize}
+
+\section{Améliorations possibles}
+
+Plusieurs pistes d'amélioration peuvent être envisagées pour faire évoluer le projet :
+
+\begin{itemize}
+\item mettre en place le backend cible fondé sur NestJS, PostgreSQL, Prisma, Swagger et Docker ;
+\item connecter l'application mobile à cette API interne au lieu des données locales ;
+\item ajouter un adaptateur WordPress REST API afin de remplacer progressivement les données mockées ;
+\item ajouter une authentification utilisateur et une synchronisation distante ;
+\item intégrer un CRM ou un système réel de suivi des demandes ;
+\item faire évoluer le chatbot vers une solution hybride intégrant une IA conversationnelle ;
+\item ajouter d'autres langues, notamment le français et l'arabe ;
+\item connecter les recommandations, tendances et restaurants à des données réelles ;
+\item mettre en place des notifications, un système de paiement et une logique de réservation complète.
+\end{itemize}
+
+\section*{Conclusion}
+
+Ce chapitre a présenté la réalisation technique du projet, les choix d'architecture, les composants principaux et les services métier développés. L'application obtenue est fonctionnelle, modulaire et suffisamment structurée pour être enrichie par la suite.
+
+% =========================
+% CONCLUSION GENERALE
+% =========================
+\chapter*{Conclusion générale}
+\addcontentsline{toc}{chapter}{Conclusion générale}
+
+Ce projet m'a permis de concevoir et de développer une application mobile de conciergerie touristique centrée sur la découverte du Maroc dans un cadre premium. À travers cette réalisation, j'ai pu mettre en pratique des compétences importantes en développement mobile, en conception d'interface, en gestion d'état, en persistance locale et en structuration de logique métier.
+
+L'application développée pour \ShortProjectName\ démontre un parcours utilisateur cohérent : choix de langue, onboarding, exploration des contenus, personnalisation par recommandations, sauvegarde de favoris, estimation budgétaire, assistance via chatbot local et génération d'une demande de voyage.
+
+Sur le plan technique, le projet confirme l'intérêt d'une architecture modulaire. La séparation entre composants, données, services métier, traductions et état global a permis de garder une base de code lisible et facilement extensible. Le recours à TypeScript, à un thème centralisé et à des services fondés sur des règles claires a également renforcé la qualité globale de l'application.
+
+Même si le projet reste limité à des données locales et à un périmètre fonctionnel volontairement maîtrisé, il constitue une base solide pour des évolutions futures vers une application connectée à de vrais services métiers. Il répond ainsi aux objectifs pédagogiques et techniques attendus dans le cadre d'un stage de fin d'études.
+
+% =========================
+% REFERENCES
+% =========================
+\chapter*{Références}
+\addcontentsline{toc}{chapter}{Références}
+
+\begin{enumerate}[label={[\arabic*]}]
+\item Meta Platforms. \textit{React Native Documentation}. Disponible sur : \texttt{https://reactnative.dev/docs/getting-started}.
+
+\item Expo. \textit{Expo Documentation}. Disponible sur : \texttt{https://docs.expo.dev/}.
+
+\item Expo. \textit{Expo Router Documentation}. Disponible sur : \texttt{https://docs.expo.dev/router/introduction/}.
+
+\item TypeScript Team. \textit{TypeScript Documentation}. Disponible sur : \texttt{https://www.typescriptlang.org/docs/}.
+
+\item React Team. \textit{React Documentation}. Disponible sur : \texttt{https://react.dev/}.
+
+\item React Native Community. \textit{AsyncStorage Documentation}. Disponible sur : \texttt{https://react-native-async-storage.github.io/async-storage/}.
+
+\item i18next Team. \textit{i18next Documentation}. Disponible sur : \texttt{https://www.i18next.com/}.
+
+\item react-i18next contributors. \textit{react-i18next Documentation}. Disponible sur : \texttt{https://react.i18next.com/}.
+
+\item React Navigation contributors. \textit{React Navigation Documentation}. Disponible sur : \texttt{https://reactnavigation.org/docs/getting-started}.
+
+\item ESLint Team. \textit{ESLint Documentation}. Disponible sur : \texttt{https://eslint.org/docs/latest/}.
+
+\item Microsoft. \textit{Visual Studio Code Documentation}. Disponible sur : \texttt{https://code.visualstudio.com/docs}.
+
+\item Git Documentation Project. \textit{Git Documentation}. Disponible sur : \texttt{https://git-scm.com/doc}.
+\end{enumerate}
+
+\end{document}

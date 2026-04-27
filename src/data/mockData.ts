@@ -10,8 +10,8 @@ import {
 export const travelStyles: TravelStyle[] = [
   {
     id: 'curator',
-    nameEn: 'Bespoke Travel',
-    nameDe: 'Maßgeschneiderte Reisen',
+    nameEn: 'Bespoke Travel / The Curator',
+    nameDe: 'Maßgeschneiderte Reisen / Der Kurator',
     descriptionEn: 'Fully customized experiences tailored to your unique preferences and desires. Our curators craft every detail to perfection.',
     descriptionDe: 'Vollständig maßgeschneiderte Erlebnisse, die auf Ihre einzigartigen Vorlieben und Wünsche abgestimmt sind. Unsere Kundenberater gestalten jedes Detail bis zur Perfektion.',
     icon: '✨',
@@ -19,8 +19,8 @@ export const travelStyles: TravelStyle[] = [
   },
   {
     id: 'culturist',
-    nameEn: 'Moroccan Culture',
-    nameDe: 'Marokkanische Kultur',
+    nameEn: 'Moroccan Tours / The Culturist',
+    nameDe: 'Marokkanische Rundreisen / Der Kulturliebhaber',
     descriptionEn: 'Deep immersive journeys through Morocco\'s rich traditions, history, and cultural heritage. Connect with the soul of the nation.',
     descriptionDe: 'Tiefe immersive Reisen durch Marokkos reiche Traditionen, Geschichte und Kulturerbe. Verbinden Sie sich mit der Seele der Nation.',
     icon: '🎭',
@@ -28,8 +28,8 @@ export const travelStyles: TravelStyle[] = [
   },
   {
     id: 'urbanite',
-    nameEn: 'City Breaks',
-    nameDe: 'Städtereisen',
+    nameEn: 'City Breaks / The Urbanite',
+    nameDe: 'Städtereisen / Der Urbanite',
     descriptionEn: 'Sophisticated urban exploration discovering vibrant cities, contemporary culture, and cosmopolitan dining.',
     descriptionDe: 'Elegante Stadterkundung mit vibranten Städten, zeitgenössischer Kultur und kosmopolitischen Gaststätten.',
     icon: '🏙️',
@@ -37,8 +37,8 @@ export const travelStyles: TravelStyle[] = [
   },
   {
     id: 'nomad',
-    nameEn: 'Adventure & Nature',
-    nameDe: 'Abenteuer & Natur',
+    nameEn: 'Adventurers / The Nomad',
+    nameDe: 'Abenteurer / Der Nomade',
     descriptionEn: 'Action-packed adventures in Morocco\'s diverse landscapes. Mountain treks, desert expeditions, and thrilling experiences await.',
     descriptionDe: 'Actiongeladene Abenteuer in Marokkos vielfältigen Landschaften. Bergwanderungen, Wüstenexpeditionen und aufregende Erlebnisse warten auf Sie.',
     icon: '🏔️',
@@ -152,7 +152,7 @@ export const activities: Activity[] = [
     category: 'Cultural',
     image: 'argan-oil',
     duration: '2-3 hours',
-    priceRange: '$25-50',
+    priceRange: '€25-50',
   },
   {
     id: 'winery',
@@ -164,7 +164,7 @@ export const activities: Activity[] = [
     category: 'Gastronomic',
     image: 'winery-val',
     duration: '3-4 hours',
-    priceRange: '$45-80',
+    priceRange: '€45-80',
   },
   {
     id: 'hammam',
@@ -176,19 +176,19 @@ export const activities: Activity[] = [
     category: 'Wellness',
     image: 'hammam',
     duration: '2 hours',
-    priceRange: '$20-40',
+    priceRange: '€20-40',
   },
   {
     id: 'boat-tour',
-    nameEn: 'Jack Sparrow Boat',
-    nameDe: 'Jack Sparrow Boot',
-    descriptionEn: 'Scenic coastal boat tour departing from Essaouira. Relax on the water while taking in stunning Atlantic views.',
-    descriptionDe: 'Malerische Küstenbootstour ab Essaouira. Entspannen Sie sich im Wasser und genießen Sie atemberaubende Atlantikaussichten.',
-    destination: 'essaouira',
+    nameEn: 'Jack Sparrow Boat Agadir',
+    nameDe: 'Jack Sparrow Boot Agadir',
+    descriptionEn: 'A playful Atlantic boat outing in Agadir, positioned as a lighter seaside experience with views, sea air, and family-friendly fun.',
+    descriptionDe: 'Verspielte Atlantik-Bootsfahrt in Agadir mit Meeresluft, Kuestenblicken und leichter Familienatmosphaere.',
+    destination: 'agadir',
     category: 'Beach & Water',
     image: 'boat-tour',
     duration: '2 hours',
-    priceRange: '$30-60',
+    priceRange: '€30-60',
   },
   {
     id: 'golf',
@@ -200,7 +200,7 @@ export const activities: Activity[] = [
     category: 'Sport',
     image: 'golf-mogador',
     duration: '4-5 hours',
-    priceRange: '$60-100',
+    priceRange: '€60-100',
   },
   {
     id: 'atlas-trekking',
@@ -212,7 +212,7 @@ export const activities: Activity[] = [
     category: 'Adventure',
     image: 'atlas-trek',
     duration: '3-5 days',
-    priceRange: '$300-600',
+    priceRange: '€300-600',
   },
   {
     id: 'gnaoua-festival',
@@ -224,7 +224,7 @@ export const activities: Activity[] = [
     category: 'Cultural',
     image: 'gnaoua-festival',
     duration: 'Multi-day',
-    priceRange: '$50-200',
+    priceRange: '€50-200',
   },
   {
     id: 'ysl-museum',
@@ -236,7 +236,7 @@ export const activities: Activity[] = [
     category: 'Cultural',
     image: 'ysl-museum',
     duration: '2-3 hours',
-    priceRange: '$8-15',
+    priceRange: '€8-15',
   },
   {
     id: 'jardin-majorelle',
@@ -248,7 +248,7 @@ export const activities: Activity[] = [
     category: 'Nature',
     image: 'jardin-majorelle',
     duration: '1.5-2 hours',
-    priceRange: '$8-12',
+    priceRange: '€8-12',
   },
   {
     id: 'surfing',
@@ -260,7 +260,7 @@ export const activities: Activity[] = [
     category: 'Beach & Water',
     image: 'surfing-lesson',
     duration: '2-3 hours',
-    priceRange: '$35-70',
+    priceRange: '€35-70',
   },
   {
     id: 'camel-trekking',
@@ -272,7 +272,7 @@ export const activities: Activity[] = [
     category: 'Adventure',
     image: 'camel-trekking',
     duration: '2-4 hours',
-    priceRange: '$50-100',
+    priceRange: '€50-100',
   },
   {
     id: 'beach-horseback',
@@ -284,7 +284,7 @@ export const activities: Activity[] = [
     category: 'Beach & Water',
     image: 'beach-horseback',
     duration: '1.5-2 hours',
-    priceRange: '$40-60',
+    priceRange: '€40-60',
   },
 ];
 
@@ -300,7 +300,7 @@ export const accommodations: Accommodation[] = [
     category: 'boutique',
     image: 'villa-maroc',
     amenities: ['WiFi', 'Rooftop Terrace', 'Restaurant', 'Spa', 'Library'],
-    pricePerNight: '$120-180',
+    pricePerNight: '€120-180',
   },
   {
     id: 'villa-jardin-maroc',
@@ -312,7 +312,7 @@ export const accommodations: Accommodation[] = [
     category: 'boutique',
     image: 'villa-jardins',
     amenities: ['WiFi', 'Gardens', 'Pool', 'Restaurant', 'Hammam'],
-    pricePerNight: '$100-150',
+    pricePerNight: '€100-150',
   },
   {
     id: 'riad-fes',
@@ -324,7 +324,7 @@ export const accommodations: Accommodation[] = [
     category: 'luxury',
     image: 'riad-fes',
     amenities: ['WiFi', 'Courtyard', 'Hammam', 'Restaurant', 'Library'],
-    pricePerNight: '$150-250',
+    pricePerNight: '€150-250',
   },
   {
     id: 'palais-ronsard',
@@ -336,7 +336,7 @@ export const accommodations: Accommodation[] = [
     category: 'luxury',
     image: 'palais-ronsard',
     amenities: ['WiFi', 'Courtyard', 'Spa', 'Restaurant', 'Garden'],
-    pricePerNight: '$200-300',
+    pricePerNight: '€200-300',
   },
   {
     id: 'le-berbere-palace',
@@ -348,7 +348,7 @@ export const accommodations: Accommodation[] = [
     category: 'luxury',
     image: 'le-berbere',
     amenities: ['WiFi', 'Pool', 'Restaurant', 'Spa', 'Desert Views'],
-    pricePerNight: '$90-140',
+    pricePerNight: '€90-140',
   },
   {
     id: 'hotel-spa-le-doge',
@@ -360,7 +360,7 @@ export const accommodations: Accommodation[] = [
     category: 'luxury',
     image: 'le-doge',
     amenities: ['WiFi', 'Spa', 'Pool', 'Restaurant', 'Gym'],
-    pricePerNight: '$130-200',
+    pricePerNight: '€130-200',
   },
   {
     id: 'dar-ahlam',
@@ -372,7 +372,7 @@ export const accommodations: Accommodation[] = [
     category: 'luxury',
     image: 'dar-ahlam',
     amenities: ['WiFi', 'Pool', 'Restaurant', 'Spa', 'Activities'],
-    pricePerNight: '$250-400',
+    pricePerNight: '€250-400',
   },
   {
     id: 'barcelo-tangier',
@@ -384,7 +384,7 @@ export const accommodations: Accommodation[] = [
     category: 'boutique',
     image: 'barcelo-tangier',
     amenities: ['WiFi', 'Beach', 'Pool', 'Restaurant', 'Water Sports'],
-    pricePerNight: '$80-120',
+    pricePerNight: '€80-120',
   },
   {
     id: 'luxury-camp-chebbi',
@@ -396,7 +396,7 @@ export const accommodations: Accommodation[] = [
     category: 'camp',
     image: 'camp-chebbi',
     amenities: ['WiFi', 'Campfire', 'Dinner', 'Desert Tours', 'Stargazing'],
-    pricePerNight: '$110-180',
+    pricePerNight: '€110-180',
   },
 ];
 
@@ -412,7 +412,7 @@ export const restaurants: Restaurant[] = [
     cuisine: 'Modern Moroccan',
     image: 'umia',
     specialties: ['Fresh Fish', 'Seafood Tagine', 'Ocean Views', 'Fine Dining'],
-    priceRange: '$30-50',
+    priceRange: '€30-50',
   },
   {
     id: 'restaurant-2',
@@ -424,7 +424,7 @@ export const restaurants: Restaurant[] = [
     cuisine: 'Traditional Moroccan',
     image: 'dar-cheikh',
     specialties: ['Tagines', 'Traditional Bread', 'Mint Tea', 'Local Ambiance'],
-    priceRange: '$15-30',
+    priceRange: '€15-30',
   },
   {
     id: 'restaurant-3',
@@ -436,7 +436,7 @@ export const restaurants: Restaurant[] = [
     cuisine: 'Traditional Moroccan',
     image: 'chez-said',
     specialties: ['Pastilla', 'Harira', 'Local Herbs', 'Home Cooking'],
-    priceRange: '$10-25',
+    priceRange: '€10-25',
   },
   {
     id: 'restaurant-4',
@@ -448,6 +448,7 @@ export const restaurants: Restaurant[] = [
     cuisine: 'Traditional Moroccan',
     image: 'kasbah-lamrani',
     specialties: ['Desert Lamb', 'Couscous', 'Local Wine', 'Ancient Recipes'],
-    priceRange: '$15-35',
+    priceRange: '€15-35',
   },
 ];
+

@@ -1,0 +1,44 @@
+flowchart LR
+    traveler[/"Voyageur"/]
+    concierge[/"Equipe Pur Life Maroc"/]
+
+    subgraph app["Application mobile Pur Life Maroc"]
+        uc1([Choisir la langue])
+        uc2([Completer l'onboarding])
+        uc3([Consulter les destinations])
+        uc4([Consulter les activites])
+        uc5([Consulter les hebergements])
+        uc6([Consulter Eat & Drink])
+        uc7([Ajouter aux favoris])
+        uc8([Construire un plan de voyage])
+        uc9([Obtenir des recommandations])
+        uc10([Estimer le budget])
+        uc11([Utiliser le chatbot])
+        uc12([Envoyer une demande de voyage])
+        uc13([Ouvrir le brouillon d'email])
+        uc14([Recevoir une demande client])
+        uc15([Repondre par email])
+    end
+
+    traveler --> uc1
+    traveler --> uc2
+    traveler --> uc3
+    traveler --> uc4
+    traveler --> uc5
+    traveler --> uc6
+    traveler --> uc7
+    traveler --> uc8
+    traveler --> uc9
+    traveler --> uc10
+    traveler --> uc11
+    traveler --> uc12
+    traveler --> uc13
+
+    concierge --> uc14
+    concierge --> uc15
+
+    uc2 --> uc9
+    uc8 --> uc10
+    uc12 --> uc13
+    uc12 --> uc14
+    uc14 --> uc15

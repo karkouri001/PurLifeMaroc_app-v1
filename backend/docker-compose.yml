@@ -1,0 +1,30 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: purlife_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: purlife_backend
+      POSTGRES_USER: purlife
+      POSTGRES_PASSWORD: purlife
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  api:
+    build: .
+    container_name: purlife_backend_api
+    restart: unless-stopped
+    depends_on:
+      - db
+    environment:
+      PORT: 3001
+      CONTENT_SOURCE: mock
+      DATABASE_URL: postgresql://purlife:purlife@db:5432/purlife_backend?schema=public
+      WORDPRESS_BASE_URL: https://example.com
+    ports:
+      - "3001:3001"
+
+volumes:
+  postgres_data:

@@ -1,0 +1,127 @@
+classDiagram
+    direction LR
+
+    class ContentController {
+        +getDestinations()
+        +getActivities()
+        +getAccommodations()
+        +getRestaurants()
+        +getTravelStyles()
+        +getItineraries()
+    }
+
+    class RecommendationsController {
+        +createRecommendation()
+    }
+
+    class EnquiriesController {
+        +createEnquiry()
+        +getEnquiryById()
+    }
+
+    class InsightsController {
+        +getInsights()
+    }
+
+    class ContentService {
+        +getDestinations()
+        +getActivities()
+        +getAccommodations()
+        +getRestaurants()
+        +getTravelStyles()
+        +getItineraries()
+    }
+
+    class RecommendationsService {
+        +buildRecommendations()
+    }
+
+    class EnquiriesService {
+        +createEnquiry()
+        +findById()
+    }
+
+    class InsightsService {
+        +buildInsights()
+    }
+
+    class ContentProvider {
+        <<interface>>
+        +getDestinations()
+        +getActivities()
+        +getAccommodations()
+        +getRestaurants()
+        +getTravelStyles()
+        +getItineraries()
+    }
+
+    class MockContentProvider {
+        +getDestinations()
+        +getActivities()
+        +getAccommodations()
+        +getRestaurants()
+        +getTravelStyles()
+        +getItineraries()
+    }
+
+    class WordPressContentProvider {
+        +getDestinations()
+        +getActivities()
+        +getAccommodations()
+        +getRestaurants()
+        +getTravelStyles()
+        +getItineraries()
+        -mapWordPressResponse()
+    }
+
+    class PrismaService {
+        +enquiry
+        +syncLog
+        +analyticsEvent
+    }
+
+    class EnquiryEntity {
+        +id
+        +name
+        +email
+        +phone
+        +travelStyle
+        +destinations
+        +startDate
+        +duration
+        +budget
+        +specialRequests
+        +createdAt
+    }
+
+    class SyncLog {
+        +id
+        +provider
+        +status
+        +message
+        +createdAt
+    }
+
+    class AnalyticsEvent {
+        +id
+        +type
+        +payload
+        +createdAt
+    }
+
+    ContentController --> ContentService
+    RecommendationsController --> RecommendationsService
+    EnquiriesController --> EnquiriesService
+    InsightsController --> InsightsService
+
+    ContentService ..> ContentProvider
+    RecommendationsService ..> ContentService
+    EnquiriesService --> PrismaService
+    InsightsService --> PrismaService
+
+    MockContentProvider ..|> ContentProvider
+    WordPressContentProvider ..|> ContentProvider
+
+    PrismaService --> EnquiryEntity
+    PrismaService --> SyncLog
+    PrismaService --> AnalyticsEvent

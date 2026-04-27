@@ -1,0 +1,40 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Enquiry {
+  id              String   @id @default(cuid())
+  name            String
+  email           String
+  phone           String?
+  travelStyle     String?
+  destinations    Json
+  startDate       String?
+  duration        String?
+  budget          String?
+  specialRequests String
+  status          String   @default("NEW")
+  source          String   @default("mobile-app")
+  createdAt       DateTime @default(now())
+}
+
+model SyncLog {
+  id        String   @id @default(cuid())
+  provider  String
+  resource  String
+  status    String
+  message   String?
+  createdAt DateTime @default(now())
+}
+
+model AnalyticsEvent {
+  id        String   @id @default(cuid())
+  type      String
+  payload   Json
+  createdAt DateTime @default(now())
+}

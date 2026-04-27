@@ -1,0 +1,29 @@
+sequenceDiagram
+    autonumber
+    actor U as Voyageur
+    participant S as RecommendationsScreen
+    participant C as AppContext
+    participant D as MockData
+    participant E as RecommendationEngine
+
+    U->>S: Ouvre l'ecran Recommendations
+    S->>C: Lire preferences
+    C-->>S: UserPreferences
+
+    alt Preferences disponibles
+        S->>S: useEffect() + delai de 700 ms
+        S->>D: Charger destinations, activities, accommodations
+        D-->>S: Donnees mockees
+        S->>E: generateRecommendations(preferences, destinations, activities, accommodations)
+        E->>E: Calculer le score des destinations
+        E->>E: Selectionner les meilleures destinations
+        E->>E: Filtrer les activites correspondantes
+        E->>E: Filtrer les hebergements compatibles
+        E->>E: Generer l'explication textuelle
+        E-->>S: RecommendationResult
+        S->>S: setRecommendations(result)
+        S-->>U: Afficher destinations, activites et hebergements recommandes
+    else Preferences absentes
+        S->>S: setLoading(false)
+        S-->>U: Afficher un etat sans recommandations
+    end

@@ -63,6 +63,38 @@ export interface Restaurant {
   priceRange: string;
 }
 
+export interface DriverProfile {
+  id: string;
+  name: string;
+  languages: string[];
+  baseCity: string;
+  specialtiesEn: string[];
+  specialtiesDe: string[];
+  summaryEn: string;
+  summaryDe: string;
+  vehicleEn: string;
+  vehicleDe: string;
+  rating: number;
+}
+
+export interface SignatureItinerary {
+  id: string;
+  nameEn: string;
+  nameDe: string;
+  summaryEn: string;
+  summaryDe: string;
+  duration: string;
+  destinations: string[];
+  themeEn: string;
+  themeDe: string;
+}
+
+export type ContentType =
+  | 'activity'
+  | 'accommodation'
+  | 'destination'
+  | 'restaurant';
+
 // User Preferences
 export interface UserPreferences {
   travelStyle: string | null;
@@ -84,9 +116,21 @@ export interface RecommendationResult {
 // Favorites
 export interface Favorite {
   id: string;
-  type: 'activity' | 'accommodation' | 'destination' | 'restaurant';
+  type: ContentType;
   itemId: string;
   addedAt: number;
+}
+
+export interface TripPlanItem {
+  id: string;
+  type: ContentType;
+  itemId: string;
+  day: number;
+  addedAt: number;
+}
+
+export interface UISettings {
+  extendIntoStatusBar: boolean;
 }
 
 // Enquiry
@@ -118,5 +162,23 @@ export interface InsightsData {
   topDestination: { name: string; count: number };
   topActivity: { name: string; count: number };
   topAccommodation: { name: string; count: number };
-  trendingExperiences: Array<{ name: string; trend: number }>;
+  topItinerary: { name: string; count: number };
+  topDriver: { name: string; count: number };
+  trendingExperiences: { name: string; trend: number }[];
+}
+
+export interface BudgetEstimateLine {
+  id: string;
+  label: string;
+  minimum: number;
+  maximum: number;
+  note?: string;
+}
+
+export interface BudgetEstimate {
+  nights: number;
+  travelers: number;
+  lines: BudgetEstimateLine[];
+  totalMinimum: number;
+  totalMaximum: number;
 }

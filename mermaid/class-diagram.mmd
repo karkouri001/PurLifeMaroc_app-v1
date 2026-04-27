@@ -1,0 +1,194 @@
+classDiagram
+    direction LR
+
+    class UserPreferences {
+        +string travelStyle
+        +string budget
+        +string duration
+        +string[] interests
+        +string[] preferredDestinations
+        +string accommodationPreference
+    }
+
+    class Destination {
+        +string id
+        +string nameEn
+        +string nameDe
+        +string descriptionEn
+        +string descriptionDe
+        +string image
+        +string[] highlights
+        +string bestSeason
+    }
+
+    class Activity {
+        +string id
+        +string nameEn
+        +string nameDe
+        +string descriptionEn
+        +string descriptionDe
+        +string destination
+        +string category
+        +string image
+        +string duration
+        +string priceRange
+    }
+
+    class Accommodation {
+        +string id
+        +string nameEn
+        +string nameDe
+        +string descriptionEn
+        +string descriptionDe
+        +string destination
+        +string category
+        +string image
+        +string[] amenities
+        +string pricePerNight
+    }
+
+    class Restaurant {
+        +string id
+        +string nameEn
+        +string nameDe
+        +string descriptionEn
+        +string descriptionDe
+        +string destination
+        +string cuisine
+        +string image
+        +string[] specialties
+        +string priceRange
+    }
+
+    class Favorite {
+        +string id
+        +string type
+        +string itemId
+        +number addedAt
+    }
+
+    class TripPlanItem {
+        +string id
+        +string type
+        +string itemId
+        +number day
+        +number addedAt
+    }
+
+    class Enquiry {
+        +string id
+        +string name
+        +string email
+        +string phone
+        +string travelStyle
+        +string[] destinations
+        +string startDate
+        +string duration
+        +string budget
+        +string specialRequests
+        +number createdAt
+    }
+
+    class RecommendationResult {
+        +Destination[] destinations
+        +Activity[] activities
+        +Accommodation[] accommodation
+        +string explanation
+    }
+
+    class BudgetEstimate {
+        +number nights
+        +number travelers
+        +BudgetEstimateLine[] lines
+        +number totalMinimum
+        +number totalMaximum
+    }
+
+    class BudgetEstimateLine {
+        +string id
+        +string label
+        +number minimum
+        +number maximum
+        +string note
+    }
+
+    class ChatMessage {
+        +string id
+        +string type
+        +string text
+        +number timestamp
+    }
+
+    class AppContext {
+        +UserPreferences preferences
+        +Favorite[] favorites
+        +TripPlanItem[] tripPlan
+        +Enquiry[] enquiries
+        +string language
+        +setPreferences()
+        +addFavorite()
+        +removeFavorite()
+        +addTripItem()
+        +removeTripItem()
+        +addEnquiry()
+        +setLanguage()
+    }
+
+    class RecommendationEngine {
+        +generateRecommendations(preferences, destinations, activities, accommodations) RecommendationResult
+        -filterDestinations()
+        -filterActivities()
+        -filterAccommodation()
+        -generateExplanation()
+    }
+
+    class BudgetEstimator {
+        +estimate(input) BudgetEstimate
+    }
+
+    class ChatbotService {
+        +generateResponse(userMessage) ChatMessage
+        +getGreeting() ChatMessage
+        +getSuggestedPrompts() string[]
+        +getFollowUpPrompts(userMessage) string[]
+    }
+
+    class EmailUtils {
+        +generateEnquiryEmailBody(enquiry, destinations, activities, accommodations) string
+        +sendEnquiryEmail(enquiry, destinations, activities, accommodations) boolean
+    }
+
+    AppContext o-- UserPreferences
+    AppContext o-- Favorite
+    AppContext o-- TripPlanItem
+    AppContext o-- Enquiry
+
+    RecommendationEngine ..> UserPreferences : uses
+    RecommendationEngine ..> Destination : scores
+    RecommendationEngine ..> Activity : filters
+    RecommendationEngine ..> Accommodation : filters
+    RecommendationEngine --> RecommendationResult : returns
+
+    RecommendationResult o-- Destination
+    RecommendationResult o-- Activity
+    RecommendationResult o-- Accommodation
+
+    BudgetEstimator ..> UserPreferences : uses
+    BudgetEstimator ..> TripPlanItem : uses
+    BudgetEstimator --> BudgetEstimate : returns
+    BudgetEstimate o-- BudgetEstimateLine
+
+    ChatbotService ..> Destination : reads
+    ChatbotService ..> Activity : reads
+    ChatbotService ..> Accommodation : reads
+    ChatbotService ..> Restaurant : reads
+    ChatbotService --> ChatMessage : returns
+
+    EmailUtils ..> Enquiry : formats
+    EmailUtils ..> Destination : reads
+    EmailUtils ..> Activity : reads
+    EmailUtils ..> Accommodation : reads
+
+    Activity --> Destination : belongs to
+    Accommodation --> Destination : belongs to
+    Restaurant --> Destination : belongs to

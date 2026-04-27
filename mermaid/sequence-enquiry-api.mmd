@@ -1,0 +1,22 @@
+sequenceDiagram
+    autonumber
+    actor U as Voyageur
+    participant M as Mobile App
+    participant API as NestJS API
+    participant EC as EnquiriesController
+    participant ES as EnquiriesService
+    participant P as PrismaService
+    participant DB as PostgreSQL
+
+    U->>M: Soumettre une demande de voyage
+    M->>API: POST /enquiries
+    API->>EC: createEnquiry(dto)
+    EC->>ES: createEnquiry(dto)
+    ES->>P: enquiry.create(...)
+    P->>DB: INSERT INTO enquiries
+    DB-->>P: Saved row
+    P-->>ES: EnquiryEntity
+    ES-->>EC: EnquiryEntity
+    EC-->>API: 201 Created
+    API-->>M: Enquiry response
+    M-->>U: Afficher la confirmation

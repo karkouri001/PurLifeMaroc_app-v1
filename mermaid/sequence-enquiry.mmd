@@ -1,0 +1,42 @@
+sequenceDiagram
+    autonumber
+    actor U as Voyageur
+    participant ES as EnquiryScreen
+    participant AC as AppContext
+    participant AS as AsyncStorage
+    participant R as Expo Router
+    participant SS as EnquirySummaryScreen
+    participant EU as emailUtils
+    participant L as Expo Linking
+    participant M as Application Mail
+
+    U->>ES: Remplit le formulaire
+    U->>ES: Clique sur "Save and open email draft"
+    ES->>ES: validateForm()
+
+    alt Formulaire invalide
+        ES-->>U: Afficher les erreurs + alerte
+    else Formulaire valide
+        ES->>ES: Construire l'objet Enquiry
+        ES->>AC: addEnquiry(enquiry)
+        AC->>AS: setItem("enquiries", JSON)
+        AS-->>AC: Confirmation
+        AC-->>ES: Enquiry enregistree
+        ES->>R: push(enquiry-summary, autoOpenEmail = 1)
+        R-->>SS: Ouvrir l'ecran de resume
+        SS->>AC: Lire enquiries
+        AC-->>SS: Liste des demandes
+        SS->>SS: Retrouver la demande via enquiryId
+
+        alt autoOpenEmail = 1
+            SS->>EU: sendEnquiryEmail(enquiry, destinations, activities, accommodations)
+            EU->>EU: generateEnquiryEmailBody(...)
+            EU->>L: canOpenURL(mailto:...)
+            L-->>EU: true
+            EU->>L: openURL(mailto:...)
+            L-->>M: Ouvrir le brouillon d'email
+            M-->>U: Afficher le brouillon pre-rempli
+        else Ouverture automatique inactive
+            SS-->>U: Afficher le resume seulement
+        end
+    end

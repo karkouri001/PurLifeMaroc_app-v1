@@ -1,67 +1,109 @@
+import { Dimensions, PixelRatio, Platform } from 'react-native';
+
+const { width: screenWidth } = Dimensions.get('window');
+const fontScale = PixelRatio.getFontScale();
+const compactScale = screenWidth < 380 ? 0.94 : screenWidth > 430 ? 1.04 : 1;
+
+const scaleFont = (size: number) =>
+  Math.round((size * compactScale) / Math.max(1, fontScale * 0.92));
+
+const scaleSpace = (size: number) => Math.round(size * compactScale);
+
+const serifFamily = Platform.select({
+  ios: 'Georgia',
+  android: 'serif',
+  default: 'Georgia',
+});
+
 // Centralized theme file
 export const colors = {
-  // Primary colors
-  primary: '#E67E22', // Warm orange
-  primaryLight: '#F39C12',
-  primaryDark: '#D35400',
+  primary: '#B85C38',
+  primaryLight: '#D28359',
+  primaryDark: '#8D4223',
 
-  // Secondary colors
-  black: '#1A1A1A',
+  black: '#17120E',
   white: '#FFFFFF',
-  lightGray: '#F5F5F5',
-  gray: '#8B8B8B',
-  darkGray: '#3A3A3A',
+  lightGray: '#F5EFE9',
+  gray: '#8F8376',
+  darkGray: '#3B2D24',
 
-  // Accent colors
-  gold: '#D4A574',
-  beige: '#F4EBE0',
-  earth: '#A67C52',
-  cream: '#FAF6F1',
+  gold: '#C79A5C',
+  beige: '#EAE0D4',
+  earth: '#88644A',
+  cream: '#FBF6F0',
+  sand: '#D9C1A5',
+  olive: '#6C6E4E',
+  surfaceDark: '#201712',
+  overlay: '#F1E4D5',
 
-  // Status colors
-  success: '#27AE60',
-  error: '#E74C3C',
-  warning: '#F39C12',
-  info: '#3498DB',
+  success: '#3F7D4B',
+  error: '#B44C3C',
+  warning: '#C9862B',
+  info: '#3B6997',
 
-  // Semantic colors
-  border: '#E8E8E8',
-  background: '#FFFFFF',
-  surface: '#F9F9F9',
-  textPrimary: '#1A1A1A',
-  textSecondary: '#8B8B8B',
+  border: '#E2D5C7',
+  background: '#FBF6F0',
+  surface: '#FFFDFC',
+  surfaceAlt: '#F3E8DC',
+  textPrimary: '#17120E',
+  textSecondary: '#6F6258',
+  textMuted: '#9A8C80',
   textLight: '#FFFFFF',
 };
 
 export const spacing = {
-  xs: 4,
-  sm: 8,
-  md: 12,
-  lg: 16,
-  xl: 24,
-  xxl: 32,
-  xxxl: 48,
+  xs: scaleSpace(4),
+  sm: scaleSpace(8),
+  md: scaleSpace(12),
+  lg: scaleSpace(16),
+  xl: scaleSpace(24),
+  xxl: scaleSpace(32),
+  xxxl: scaleSpace(48),
 };
 
 export const typography = {
-  // Font sizes
-  h1: { fontSize: 32, fontWeight: 'bold' as const, lineHeight: 40 },
-  h2: { fontSize: 28, fontWeight: 'bold' as const, lineHeight: 36 },
-  h3: { fontSize: 24, fontWeight: 'bold' as const, lineHeight: 32 },
-  h4: { fontSize: 20, fontWeight: 'bold' as const, lineHeight: 28 },
-  h5: { fontSize: 18, fontWeight: '600' as const, lineHeight: 24 },
-  body: { fontSize: 16, fontWeight: '400' as const, lineHeight: 24 },
-  bodySmall: { fontSize: 14, fontWeight: '400' as const, lineHeight: 20 },
-  caption: { fontSize: 12, fontWeight: '400' as const, lineHeight: 16 },
-  overline: { fontSize: 11, fontWeight: '600' as const, lineHeight: 14 },
+  h1: {
+    fontSize: scaleFont(34),
+    fontWeight: '700' as const,
+    lineHeight: scaleFont(42),
+    fontFamily: serifFamily,
+  },
+  h2: {
+    fontSize: scaleFont(30),
+    fontWeight: '700' as const,
+    lineHeight: scaleFont(38),
+    fontFamily: serifFamily,
+  },
+  h3: {
+    fontSize: scaleFont(26),
+    fontWeight: '700' as const,
+    lineHeight: scaleFont(34),
+    fontFamily: serifFamily,
+  },
+  h4: {
+    fontSize: scaleFont(22),
+    fontWeight: '700' as const,
+    lineHeight: scaleFont(30),
+    fontFamily: serifFamily,
+  },
+  h5: { fontSize: scaleFont(18), fontWeight: '600' as const, lineHeight: scaleFont(25) },
+  body: { fontSize: scaleFont(16), fontWeight: '400' as const, lineHeight: scaleFont(24) },
+  bodySmall: { fontSize: scaleFont(14), fontWeight: '400' as const, lineHeight: scaleFont(21) },
+  caption: { fontSize: scaleFont(12), fontWeight: '500' as const, lineHeight: scaleFont(16) },
+  overline: {
+    fontSize: scaleFont(11),
+    fontWeight: '700' as const,
+    lineHeight: scaleFont(14),
+    letterSpacing: 0.8,
+  },
 };
 
 export const radius = {
   none: 0,
   sm: 4,
   md: 8,
-  lg: 12,
-  xl: 16,
+  lg: 14,
+  xl: 20,
   full: 999,
 };
 
@@ -81,17 +123,17 @@ export const shadows = {
     elevation: 2,
   },
   md: {
-    shadowColor: '#000',
+    shadowColor: '#3F2B1F',
     shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.12,
-    shadowRadius: 8,
+    shadowOpacity: 0.08,
+    shadowRadius: 10,
     elevation: 4,
   },
   lg: {
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.15,
-    shadowRadius: 12,
+    shadowColor: '#3F2B1F',
+    shadowOffset: { width: 0, height: 10 },
+    shadowOpacity: 0.12,
+    shadowRadius: 16,
     elevation: 6,
   },
 };

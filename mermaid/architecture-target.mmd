@@ -1,0 +1,38 @@
+flowchart LR
+    user[Voyageur]
+    mobile[Application mobile\nExpo + React Native]
+    api[NestJS API\nFastify]
+    recommendation[Recommendation Module]
+    enquiry[Enquiry Module]
+    content[Content Module]
+    insights[Insights Module]
+    provider[Content Provider Interface]
+    mock[MockContentProvider]
+    wp[WordPressContentProvider]
+    pg[(PostgreSQL)]
+    prisma[Prisma]
+    swagger[Swagger / OpenAPI]
+    docker[Docker]
+    wordpress[WordPress REST API]
+
+    user --> mobile
+    mobile --> api
+
+    api --> recommendation
+    api --> enquiry
+    api --> content
+    api --> insights
+
+    content --> provider
+    provider --> mock
+    provider --> wp
+    wp --> wordpress
+
+    enquiry --> prisma
+    insights --> prisma
+    recommendation --> prisma
+    prisma --> pg
+
+    api --> swagger
+    api -. runs in .-> docker
+    pg -. runs in .-> docker
