@@ -130,7 +130,25 @@ export default function MoreTab() {
         </View>
 
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Planning tools</Text>
+          <Text style={styles.sectionTitle}>Information tools</Text>
+
+          <TouchableOpacity onPress={() => router.push('/(app)/prestay-login' as never)}>
+            <Card>
+              <View style={styles.settingRow}>
+                <View style={styles.settingContent}>
+                  <Text style={styles.settingTitle}>
+                    {locale === 'de' ? 'Pre-Stay Zugang' : 'Pre-stay access'}
+                  </Text>
+                  <Text style={styles.settingDescription}>
+                    {locale === 'de'
+                      ? 'Oeffnen Sie den Begleiter fuer Ihre kommende Pur Life Maroc Reise'
+                      : 'Open the companion for your upcoming Pur Life Maroc stay'}
+                  </Text>
+                </View>
+                <Text style={styles.settingArrow}>{'>'}</Text>
+              </View>
+            </Card>
+          </TouchableOpacity>
 
           <TouchableOpacity onPress={() => router.push('/(app)/search' as never)}>
             <Card>
@@ -148,15 +166,15 @@ export default function MoreTab() {
             </Card>
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => router.push('/(app)/trip-planner' as never)}>
+          <TouchableOpacity onPress={() => router.push('/(app)/about-purlife' as never)}>
             <Card>
               <View style={styles.settingRow}>
                 <View style={styles.settingContent}>
-                  <Text style={styles.settingTitle}>Trip planner</Text>
+                  <Text style={styles.settingTitle}>About Pur Life Maroc</Text>
                   <Text style={styles.settingDescription}>
                     {locale === 'de'
-                      ? 'Build a simple day-by-day route from saved ideas'
-                      : 'Build a simple day-by-day route from saved ideas'}
+                      ? 'Services, team, offices, and the brand context'
+                      : 'Services, team, offices, and the brand context'}
                   </Text>
                 </View>
                 <Text style={styles.settingArrow}>{'>'}</Text>
@@ -164,15 +182,15 @@ export default function MoreTab() {
             </Card>
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => router.push('/(app)/budget-estimator' as never)}>
+          <TouchableOpacity onPress={() => router.push('/(app)/enquiry' as never)}>
             <Card>
               <View style={styles.settingRow}>
                 <View style={styles.settingContent}>
-                  <Text style={styles.settingTitle}>Budget estimator</Text>
+                  <Text style={styles.settingTitle}>Concierge request</Text>
                   <Text style={styles.settingDescription}>
                     {locale === 'de'
-                      ? 'Preview a travel range before reaching out'
-                      : 'Preview a travel range before reaching out'}
+                      ? 'Send a lightweight information request by email'
+                      : 'Send a lightweight information request by email'}
                   </Text>
                 </View>
                 <Text style={styles.settingArrow}>{'>'}</Text>

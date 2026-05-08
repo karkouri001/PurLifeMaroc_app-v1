@@ -32,6 +32,7 @@ export default function ActivitiesListScreen() {
 
   const renderActivity = ({ item }: { item: Activity }) => {
     const saved = isFavorited('activity', item.id);
+    const imageSource = getActivityImage(item.image);
 
     return (
       <TouchableOpacity
@@ -44,9 +45,7 @@ export default function ActivitiesListScreen() {
         activeOpacity={0.8}
       >
         <Card>
-          {getActivityImage(item.image) ? (
-            <CardMedia source={getActivityImage(item.image)} />
-          ) : null}
+          {imageSource ? <CardMedia source={imageSource} /> : null}
 
           <View style={styles.cardHeader}>
             <Text style={styles.activityName}>
@@ -67,7 +66,7 @@ export default function ActivitiesListScreen() {
             {locale === 'de' ? item.descriptionDe : item.descriptionEn}
           </Text>
 
-          <Text style={styles.activityMeta}>{`${item.duration} | ${item.priceRange}`}</Text>
+          <Text style={styles.activityMeta}>{`${item.duration} | ${item.category}`}</Text>
         </Card>
       </TouchableOpacity>
     );
@@ -92,7 +91,7 @@ export default function ActivitiesListScreen() {
           <HeroBanner
             eyebrow="Experiences"
             title="Culture, wellness, coast, and adventure"
-            description="Each activity card now includes a real visual plus timing and price range for quicker comparison."
+            description="Workbook-aligned PLM experiences with context, timing, and service notes instead of checkout details."
             style={styles.hero}
           />
         }

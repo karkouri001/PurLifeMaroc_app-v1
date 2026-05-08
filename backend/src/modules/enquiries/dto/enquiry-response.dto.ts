@@ -25,9 +25,6 @@ export class EnquiryResponseDto {
   @ApiPropertyOptional()
   duration?: string | null;
 
-  @ApiPropertyOptional()
-  budget?: string | null;
-
   @ApiProperty()
   specialRequests!: string;
 

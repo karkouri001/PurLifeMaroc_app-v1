@@ -10,7 +10,6 @@ import {
   ContentType,
   Destination,
   Restaurant,
-  TripPlanItem,
   UserPreferences,
 } from '../types';
 
@@ -104,25 +103,6 @@ export function getDestinationIdForContent(
   return (item as Activity | Accommodation | Restaurant).destination;
 }
 
-export function getContentPriceLabel(
-  type: ContentType,
-  item: ContentItem
-): string | null {
-  if (type === 'activity') {
-    return (item as Activity).priceRange;
-  }
-
-  if (type === 'accommodation') {
-    return (item as Accommodation).pricePerNight;
-  }
-
-  if (type === 'restaurant') {
-    return (item as Restaurant).priceRange;
-  }
-
-  return null;
-}
-
 export function getContentMeta(
   type: ContentType,
   item: ContentItem,
@@ -142,11 +122,11 @@ export function getContentMeta(
 
   if (type === 'accommodation') {
     const accommodation = item as Accommodation;
-    return `${accommodation.category} | ${accommodation.pricePerNight}`;
+    return `${accommodation.category} | ${accommodation.stayStyle}`;
   }
 
   const restaurant = item as Restaurant;
-  return `${restaurant.cuisine} | ${restaurant.priceRange}`;
+  return `${restaurant.cuisine} | ${restaurant.atmosphere}`;
 }
 
 export function getContentTypeLabel(type: ContentType, language: string): string {
@@ -163,53 +143,6 @@ export function getContentTypeLabel(type: ContentType, language: string): string
   }
 
   return language === 'de' ? 'Dining' : 'Dining';
-}
-
-export function extractNumericRange(value: string): [number, number] | null {
-  const matches = value.match(/\d+(?:\.\d+)?/g);
-
-  if (!matches || matches.length === 0) {
-    return null;
-  }
-
-  const numbers = matches.map((entry) => Number(entry)).filter((entry) => !Number.isNaN(entry));
-
-  if (numbers.length === 0) {
-    return null;
-  }
-
-  if (numbers.length === 1) {
-    return [numbers[0], numbers[0]];
-  }
-
-  return [numbers[0], numbers[1]];
-}
-
-export function matchesBudgetLabel(
-  priceLabel: string | null,
-  budget: UserPreferences['budget'] | 'all'
-): boolean {
-  if (budget === 'all' || !priceLabel) {
-    return true;
-  }
-
-  const range = extractNumericRange(priceLabel);
-
-  if (!range) {
-    return true;
-  }
-
-  const average = (range[0] + range[1]) / 2;
-
-  if (budget === 'budget') {
-    return average <= 60;
-  }
-
-  if (budget === 'mid') {
-    return average > 60 && average <= 180;
-  }
-
-  return average > 180;
 }
 
 export function getPreferredTripLength(duration: UserPreferences['duration']): number {
@@ -230,24 +163,4 @@ export function getPreferredTripLength(duration: UserPreferences['duration']): n
   }
 
   return 5;
-}
-
-export function getPlanDestinationCount(plan: TripPlanItem[]): number {
-  const ids = new Set<string>();
-
-  plan.forEach((entry) => {
-    const item = findContentItem(entry.type, entry.itemId);
-
-    if (!item) {
-      return;
-    }
-
-    const destinationId = getDestinationIdForContent(entry.type, item);
-
-    if (destinationId) {
-      ids.add(destinationId);
-    }
-  });
-
-  return ids.size;
 }

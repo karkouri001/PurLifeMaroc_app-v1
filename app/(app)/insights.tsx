@@ -45,7 +45,7 @@ export default function InsightsScreen() {
         </View>
 
         <View style={styles.statsRow}>
-          <StatChip label={locale === 'de' ? 'Top itinerary' : 'Top itinerary'} value={insights.topItinerary.name} />
+          <StatChip label={locale === 'de' ? 'Top route idea' : 'Top route idea'} value={insights.topItinerary.name} />
           <View style={styles.spacer} />
           <StatChip label={locale === 'de' ? 'Top driver' : 'Top driver'} value={insights.topDriver.name} />
         </View>

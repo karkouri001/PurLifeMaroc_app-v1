@@ -42,6 +42,7 @@ export default function AccommodationListScreen() {
 
   const renderAccommodation = ({ item }: { item: Accommodation }) => {
     const saved = isFavorited('accommodation', item.id);
+    const imageSource = getAccommodationImage(item.image);
 
     return (
       <TouchableOpacity
@@ -54,9 +55,7 @@ export default function AccommodationListScreen() {
         activeOpacity={0.8}
       >
         <Card>
-          {getAccommodationImage(item.image) ? (
-            <CardMedia source={getAccommodationImage(item.image)} />
-          ) : null}
+          {imageSource ? <CardMedia source={imageSource} /> : null}
 
           <View style={styles.cardHeader}>
             <Text style={styles.nameText}>
@@ -79,7 +78,7 @@ export default function AccommodationListScreen() {
 
           <View style={styles.footerRow}>
             <Badge label={item.category} />
-            <Text style={styles.priceText}>{item.pricePerNight}</Text>
+            <Text style={styles.styleText}>{item.stayStyle}</Text>
           </View>
         </Card>
       </TouchableOpacity>
@@ -97,8 +96,8 @@ export default function AccommodationListScreen() {
       <View style={styles.content}>
         <HeroBanner
           eyebrow="Stays"
-          title="Curated properties only"
-          description="Photos, stay category, and nightly ranges make the shortlist easier to understand on phone."
+          title="Pur Life Living"
+          description="Luxury Living and Experience Living references from the website relaunch workbook."
           style={styles.hero}
         />
 
@@ -165,7 +164,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  priceText: {
+  styleText: {
     ...theme.typography.body,
     color: theme.colors.primaryDark,
     fontWeight: '700',

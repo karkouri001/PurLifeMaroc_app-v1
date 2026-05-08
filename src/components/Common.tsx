@@ -13,6 +13,7 @@ import {
   ImageBackground,
   ImageSourcePropType,
 } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { theme } from '../theme/theme';
 import { useResponsiveLayout } from '../theme/responsive';
 import { brandAssets } from '../data/imageAssets';
@@ -45,7 +46,7 @@ export const Button: React.FC<ButtonProps> = ({
       justifyContent: 'center',
       alignItems: 'center',
       flexDirection: 'row',
-      ...theme.shadows.md,
+      ...theme.shadows.none,
     };
 
     const sizes: Record<string, ViewStyle> = {
@@ -127,13 +128,12 @@ export const Card: React.FC<CardProps> = ({
   variant = 'default',
 }) => {
   const cardStyle: ViewStyle = {
-    backgroundColor: theme.colors.surface,
-    borderRadius: theme.radius.xl,
+    backgroundColor:
+      variant === 'elevated' ? theme.colors.surface : theme.colors.surfaceAlt,
+    borderRadius: theme.radius.md,
     padding: theme.spacing.lg,
     marginBottom: theme.spacing.md,
-    borderWidth: 1,
-    borderColor: theme.colors.border,
-    ...theme.shadows[variant === 'elevated' ? 'lg' : 'md'],
+    ...theme.shadows.none,
   };
 
   const content = <View style={[cardStyle, style]}>{children}</View>;
@@ -199,15 +199,22 @@ export const Header: React.FC<HeaderProps> = ({
       <View style={styles.headerContent}>
         {onBackPress ? (
           <TouchableOpacity onPress={onBackPress} style={styles.backButton}>
-            <Text style={styles.backText}>{'<'}</Text>
+            <Ionicons name="chevron-back" size={22} color={theme.colors.primary} />
           </TouchableOpacity>
         ) : null}
+        <Image source={brandAssets.logo} style={styles.headerLogo} resizeMode="contain" />
         <View style={styles.headerTextWrap}>
-          <View style={styles.headerTitleRow}>
-            <Image source={brandAssets.logo} style={styles.headerLogo} resizeMode="contain" />
-            <Text style={styles.headerTitle}>{title}</Text>
-          </View>
-          {subtitle ? <Text style={styles.headerSubtitle}>{subtitle}</Text> : null}
+          <Text style={styles.headerBrand} numberOfLines={1}>
+            Pur Life Maroc
+          </Text>
+          <Text style={styles.headerTitle} numberOfLines={1}>
+            {title}
+          </Text>
+          {subtitle ? (
+            <Text style={styles.headerSubtitle} numberOfLines={2}>
+              {subtitle}
+            </Text>
+          ) : null}
         </View>
         {rightIcon ? <View>{rightIcon}</View> : null}
       </View>
@@ -231,12 +238,58 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
       <View style={{ flex: 1 }}>
         <Text style={styles.sectionTitle}>{title}</Text>
         {subtitle ? <Text style={styles.sectionSubtitle}>{subtitle}</Text> : null}
+        <BirdDivider compact />
       </View>
       {onViewAll ? (
         <TouchableOpacity onPress={onViewAll}>
           <Text style={styles.viewAllText}>View all</Text>
         </TouchableOpacity>
       ) : null}
+    </View>
+  );
+};
+
+export const BirdMark: React.FC<{ size?: number; color?: string }> = ({
+  size = 18,
+  color = theme.colors.primary,
+}) => {
+  const wingStyle = {
+    width: size,
+    height: Math.max(7, Math.round(size * 0.48)),
+    borderTopWidth: 2,
+    borderColor: color,
+    borderRadius: size,
+  };
+
+  return (
+    <View style={[styles.birdMark, { width: size * 1.8, height: size }]}>
+      <View
+        style={[
+          styles.birdWing,
+          wingStyle,
+          { left: 0, transform: [{ rotate: '18deg' }] },
+        ]}
+      />
+      <View
+        style={[
+          styles.birdWing,
+          wingStyle,
+          { right: 0, transform: [{ rotate: '-18deg' }] },
+        ]}
+      />
+    </View>
+  );
+};
+
+export const BirdDivider: React.FC<{ compact?: boolean; color?: string }> = ({
+  compact = false,
+  color = theme.colors.primary,
+}) => {
+  return (
+    <View style={[styles.birdDivider, compact ? styles.birdDividerCompact : null]}>
+      <BirdMark size={compact ? 11 : 15} color={color} />
+      <BirdMark size={compact ? 14 : 18} color={color} />
+      <BirdMark size={compact ? 11 : 15} color={color} />
     </View>
   );
 };
@@ -295,25 +348,8 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
     minHeight: layout.heroMinHeight,
     padding: layout.heroPadding,
   };
-  const heroGlowLargeStyle = {
-    width: layout.heroGlowLargeSize,
-    height: layout.heroGlowLargeSize,
-    borderRadius: layout.heroGlowLargeSize / 2,
-    right: -Math.round(layout.heroGlowLargeSize * 0.16),
-    top: -Math.round(layout.heroGlowLargeSize * 0.12),
-  };
-  const heroGlowSmallStyle = {
-    width: layout.heroGlowSmallSize,
-    height: layout.heroGlowSmallSize,
-    borderRadius: layout.heroGlowSmallSize / 2,
-    left: -Math.round(layout.heroGlowSmallSize * 0.18),
-    bottom: Math.round(layout.heroGlowSmallSize * 0.24),
-  };
-
   const content = (
     <>
-      <View style={[styles.heroGlowLarge, heroGlowLargeStyle]} />
-      <View style={[styles.heroGlowSmall, heroGlowSmallStyle]} />
       {logoSource ? (
         <View style={styles.heroBrandRow}>
           <Image source={logoSource} style={styles.heroInlineLogo} resizeMode="contain" />
@@ -323,6 +359,7 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
       {eyebrow ? <Text style={styles.heroEyebrow}>{eyebrow}</Text> : null}
       <Text style={styles.heroTitle}>{title}</Text>
       <Text style={styles.heroDescription}>{description}</Text>
+      <BirdDivider />
       {accent ? <Text style={styles.heroAccent}>{accent}</Text> : null}
       {chips.length > 0 ? (
         <View style={styles.chipsRow}>
@@ -374,8 +411,8 @@ const styles = StyleSheet.create({
     marginHorizontal: -theme.spacing.lg,
     marginBottom: theme.spacing.md,
     overflow: 'hidden',
-    borderTopLeftRadius: theme.radius.xl,
-    borderTopRightRadius: theme.radius.xl,
+    borderTopLeftRadius: theme.radius.md,
+    borderTopRightRadius: theme.radius.md,
     backgroundColor: theme.colors.surfaceAlt,
   },
   cardMediaImage: {
@@ -385,9 +422,7 @@ const styles = StyleSheet.create({
   headerContainer: {
     backgroundColor: theme.colors.background,
     paddingHorizontal: theme.spacing.lg,
-    paddingBottom: theme.spacing.lg,
-    borderBottomColor: theme.colors.border,
-    borderBottomWidth: 1,
+    paddingBottom: theme.spacing.md,
   },
   headerContent: {
     flexDirection: 'row',
@@ -397,32 +432,29 @@ const styles = StyleSheet.create({
   headerTextWrap: {
     flex: 1,
   },
-  headerTitleRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
   headerLogo: {
-    width: 26,
-    height: 26,
-    marginRight: theme.spacing.sm,
+    width: 52,
+    height: 52,
+    marginRight: theme.spacing.md,
   },
   backButton: {
-    marginRight: theme.spacing.md,
-    width: 36,
-    height: 36,
-    borderRadius: 18,
+    marginRight: theme.spacing.sm,
+    width: 34,
+    height: 44,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: theme.colors.surfaceAlt,
   },
-  backText: {
-    fontSize: 18,
-    color: theme.colors.primary,
-    fontWeight: '600',
+  headerBrand: {
+    ...theme.typography.h5,
+    color: theme.colors.textPrimary,
+    fontFamily: theme.fonts.display,
+    fontWeight: '700',
   },
   headerTitle: {
-    ...theme.typography.h4,
-    color: theme.colors.textPrimary,
+    ...theme.typography.caption,
+    color: theme.colors.primary,
+    marginTop: 1,
+    textTransform: 'uppercase',
   },
   headerSubtitle: {
     ...theme.typography.bodySmall,
@@ -445,6 +477,24 @@ const styles = StyleSheet.create({
     color: theme.colors.textSecondary,
     marginTop: theme.spacing.xs,
   },
+  birdDivider: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: theme.spacing.md,
+    marginBottom: theme.spacing.xs,
+  },
+  birdDividerCompact: {
+    marginTop: theme.spacing.sm,
+    marginBottom: 0,
+  },
+  birdMark: {
+    position: 'relative',
+    marginRight: theme.spacing.xs,
+  },
+  birdWing: {
+    position: 'absolute',
+    top: 0,
+  },
   viewAllText: {
     ...theme.typography.bodySmall,
     color: theme.colors.primary,
@@ -455,32 +505,16 @@ const styles = StyleSheet.create({
     borderRadius: theme.radius.xl,
     backgroundColor: theme.colors.surfaceDark,
     justifyContent: 'flex-end',
-    borderWidth: 1,
-    borderColor: '#3A2A21',
-  },
-  heroGlowLarge: {
-    position: 'absolute',
-    backgroundColor: 'rgba(184, 92, 56, 0.24)',
-  },
-  heroGlowSmall: {
-    position: 'absolute',
-    backgroundColor: 'rgba(217, 193, 165, 0.25)',
   },
   heroBrandRow: {
     flexDirection: 'row',
     alignItems: 'center',
     alignSelf: 'flex-start',
-    paddingHorizontal: theme.spacing.md,
-    paddingVertical: theme.spacing.sm,
-    borderRadius: theme.radius.full,
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
-    borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.14)',
     marginBottom: theme.spacing.md,
   },
   heroInlineLogo: {
-    width: 28,
-    height: 28,
+    width: 38,
+    height: 38,
     marginRight: theme.spacing.sm,
   },
   heroBrandText: {
@@ -490,7 +524,7 @@ const styles = StyleSheet.create({
   },
   heroEyebrow: {
     ...theme.typography.overline,
-    color: '#E3C7A8',
+    color: theme.colors.primary,
     marginBottom: theme.spacing.sm,
   },
   heroTitle: {
@@ -501,12 +535,12 @@ const styles = StyleSheet.create({
   },
   heroDescription: {
     ...theme.typography.body,
-    color: '#F1E4D5',
+    color: 'rgba(255, 255, 255, 0.82)',
     maxWidth: '100%',
   },
   heroAccent: {
     ...theme.typography.caption,
-    color: '#E3C7A8',
+    color: theme.colors.primary,
     marginTop: theme.spacing.md,
     fontWeight: '700',
   },
@@ -517,8 +551,6 @@ const styles = StyleSheet.create({
   },
   chip: {
     backgroundColor: 'rgba(255, 255, 255, 0.08)',
-    borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.12)',
     borderRadius: theme.radius.full,
     paddingHorizontal: theme.spacing.md,
     paddingVertical: theme.spacing.sm,
@@ -534,15 +566,14 @@ const styles = StyleSheet.create({
   },
   heroImageOverlay: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(21, 14, 10, 0.46)',
+    backgroundColor: 'rgba(0, 0, 0, 0.54)',
   },
   statChip: {
     flex: 1,
-    backgroundColor: theme.colors.surface,
-    borderRadius: theme.radius.lg,
+    backgroundColor: theme.colors.surfaceAlt,
+    borderRadius: theme.radius.md,
     padding: theme.spacing.lg,
-    borderWidth: 1,
-    borderColor: theme.colors.border,
+    ...theme.shadows.none,
   },
   statValue: {
     ...theme.typography.h4,
@@ -564,4 +595,6 @@ export default {
   Badge,
   HeroBanner,
   StatChip,
+  BirdMark,
+  BirdDivider,
 };

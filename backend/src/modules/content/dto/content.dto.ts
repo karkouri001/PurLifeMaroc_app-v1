@@ -78,7 +78,7 @@ export class ActivityDto {
   duration!: string;
 
   @ApiProperty()
-  priceRange!: string;
+  serviceNote!: string;
 }
 
 export class AccommodationDto {
@@ -110,7 +110,7 @@ export class AccommodationDto {
   amenities!: string[];
 
   @ApiProperty()
-  pricePerNight!: string;
+  stayStyle!: string;
 }
 
 export class RestaurantDto {
@@ -142,7 +142,7 @@ export class RestaurantDto {
   specialties!: string[];
 
   @ApiProperty()
-  priceRange!: string;
+  atmosphere!: string;
 }
 
 export class DriverProfileDto {
@@ -224,4 +224,33 @@ export class CompanyProfileDto {
 
   @ApiProperty()
   phone!: string;
+}
+
+export class WebsiteContentDto {
+  @ApiProperty({ type: TravelStyleDto, isArray: true })
+  travelStyles!: TravelStyleDto[];
+
+  @ApiProperty({ type: DestinationDto, isArray: true })
+  destinations!: DestinationDto[];
+
+  @ApiProperty({ type: ActivityDto, isArray: true })
+  activities!: ActivityDto[];
+
+  @ApiProperty({ type: AccommodationDto, isArray: true })
+  accommodations!: AccommodationDto[];
+
+  @ApiProperty({ type: RestaurantDto, isArray: true })
+  restaurants!: RestaurantDto[];
+
+  @ApiProperty({ type: DriverProfileDto, isArray: true })
+  drivers!: DriverProfileDto[];
+
+  @ApiProperty({ type: SignatureItineraryDto, isArray: true })
+  itineraries!: SignatureItineraryDto[];
+
+  @ApiProperty({ type: CompanyProfileDto })
+  companyProfile!: CompanyProfileDto;
+
+  @ApiProperty()
+  source!: string;
 }

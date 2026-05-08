@@ -43,7 +43,6 @@ Travel Style: ${enquiry.travelStyle || 'Not specified'}
 Destinations: ${destinationNames || 'Not specified'}
 Trip Timing: ${enquiry.startDate || 'Flexible'}
 Duration: ${enquiry.duration || 'Flexible'}
-Budget: ${enquiry.budget || 'Flexible'}
 Suggested Activities: ${activityNames || 'To be curated by concierge'}
 Suggested Accommodation: ${accommodationName || 'To be curated by concierge'}
 
@@ -115,13 +114,6 @@ export const formatUtils = {
   },
 
   /**
-   * Format price range
-   */
-  formatPrice: (priceString: string): string => {
-    return priceString.startsWith('$') ? priceString : `$${priceString}`;
-  },
-
-  /**
    * Truncate text to specified length
    */
   truncateText: (text: string, length: number = 100): string => {
@@ -182,10 +174,6 @@ export const validationUtils = {
 
     if (!enquiry.duration) {
       errors.push('Please select duration');
-    }
-
-    if (!enquiry.budget) {
-      errors.push('Please select budget range');
     }
 
     return {
@@ -257,7 +245,6 @@ export const storageUtils = {
     return `
 Trip to ${enquiry.destinations.length} destination(s)
 Duration: ${enquiry.duration}
-Budget: ${enquiry.budget}
 Submitted: ${new Date(enquiry.createdAt).toLocaleDateString()}
     `.trim();
   },

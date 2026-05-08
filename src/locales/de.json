@@ -49,12 +49,6 @@
     "title": "Erzählen Sie uns von sich",
     "subtitle": "Helfen Sie uns, Ihr perfektes Marokko-Erlebnis zu kuratieren",
     "step1": "Was ist Ihr Reisestil?",
-    "step2": "Was ist Ihr Budget?",
-    "budget": {
-      "budget": "Budget-freundlich",
-      "mid": "Mittleres Preisniveau",
-      "luxury": "Luxus"
-    },
     "step3": "Wie lange bleiben Sie?",
     "duration": {
       "weekend": "Wochenende (2-3 Tage)",
@@ -117,9 +111,8 @@
     "subtitle": "Kuratierte Erlebnisse",
     "noActivities": "Keine Aktivitäten gefunden",
     "duration": "Dauer",
-    "price": "Preis",
     "category": "Kategorie",
-    "bookNow": "Zur Reiseroute hinzufügen"
+    "bookNow": "Concierge anfragen"
   },
   "accommodation": {
     "title": "Wo übernachten",
@@ -129,7 +122,6 @@
     "camp": "Wüstencamps",
     "traditional": "Traditionelle Häuser",
     "amenities": "Ausstattung",
-    "pricePerNight": "Pro Nacht",
     "selectRoom": "Unterkunft anzeigen"
   },
   "eatDrink": {
@@ -137,7 +129,6 @@
     "subtitle": "Marokkanische Gastronomie",
     "cuisine": "Küche",
     "specialties": "Spezialitäten",
-    "priceRange": "Preisbereich",
     "reserve": "Reservierung vornehmen",
     "noRestaurants": "Keine Restaurants gefunden"
   },
@@ -147,7 +138,7 @@
     "headline": "24/7-Kundenservice",
     "description": "Unser Concierge-Team ist rund um die Uhr verfügbar, um Sie bei Anfragen, besonderen Arrangements oder Ratschlägen zu Ihrer marokkanischen Reise zu unterstützen.",
     "services": [
-      "Personalisierte Reiseplanung",
+      "Persoenliche Concierge-Beratung",
       "Restaurantreservierungen",
       "Aktivitätsbuchungen",
       "Transportanordnung",
@@ -194,7 +185,6 @@
     "selectedDestinations": "Ausgewählte Ziele",
     "startDate": "Bevorzugtes Startdatum",
     "duration": "Dauer",
-    "budget": "Budgetbereich",
     "specialRequests": "Spezielle Anfragen",
     "requestText": "Erzählen Sie uns, was Sie erleben möchten...",
     "submit": "Anfrage senden",
@@ -262,8 +252,6 @@
     "no-activities": "Keine Aktivitäten gefunden",
     "no-activities-found": "Wir konnten keine Aktivitäten finden, die Ihrer Suche entsprechen",
     "activity-details": "Aktivitätsdetails",
-    "add-to-itinerary": "Zur Reiseroute hinzufügen",
-    "add-to-itinerary-message": "Fügen Sie diese Aktivität zu Ihrer benutzerdefinierten Reiseroute hinzu",
     "ready-to-book": "Bereit zu buchen?",
     "accommodation": "Unterkunft",
     "by-destination": "Unterkunft nach Ziel",
@@ -272,7 +260,6 @@
     "no-accommodation-found": "Wir konnten keine Unterkunft finden, die Ihren Kriterien entspricht",
     "accommodation-details": "Unterkunftsdetails",
     "amenities": "Ausstattung",
-    "price-per-night": "Preis pro Nacht",
     "interested": "Interessiert an dieser Unterkunft?",
     "book-or-enquire": "Senden Sie uns eine Anfrage, um zu buchen oder mehr zu erfahren",
     "view-property": "Unterkunft anzeigen",
@@ -306,8 +293,6 @@
     "enter-start-date-format": "z.B. 2024-05-15",
     "duration": "Dauer",
     "e.g.-7-days": "z.B. 7 Tage",
-    "budget-range": "Budgetbereich",
-    "e.g.-3000-eur": "z.B. 3000 €",
     "your-preferences": "Ihre Vorlieben",
     "travel-style": "Reisestil",
     "not-selected": "Nicht ausgewählt",
@@ -320,7 +305,6 @@
     "phone-required": "Telefonnummer ist erforderlich",
     "date-required": "Startdatum ist erforderlich",
     "duration-required": "Dauer ist erforderlich",
-    "budget-required": "Budget ist erforderlich",
     "error": "Fehler",
     "failed-to-submit-enquiry": "Fehler beim Absenden der Anfrage. Bitte versuchen Sie es später erneut.",
     "next-step": "Was geschieht als nächstes",
@@ -336,15 +320,13 @@
     "your-enquiry": "Ihre Anfrageinformationen",
     "full-name": "Vollständiger Name",
     "start-date": "Startdatum",
-    "budget": "Budget",
-    "budget-range": "Budgetbereich",
     "what-happens-next": "Was geschieht als nächstes",
     "review-step": "Überprüfung (24 Stunden)",
     "our-team-reviews": "Unser Team wird Ihre Anfrage sorgfältig überprüfen",
     "contact-step": "Wir kontaktieren Sie",
     "we-will-contact": "Wir werden Sie über Ihren bevorzugten Kommunikationskanal kontaktieren",
-    "finalize-step": "Reiseroute finalisieren",
-    "customize-finalize": "Zusammen erstellen und finalisieren wir Ihre perfekte Reiseroute",
+    "finalize-step": "Details finalisieren",
+    "customize-finalize": "Gemeinsam formen wir die passende Service-Anfrage fuer Ihren Aufenthalt in Marokko",
     "need-assistance": "Benötigen Sie Unterstützung?",
     "reach-out-anytime": "Wenden Sie sich jederzeit an unsere Concierge um Unterstützung zu erhalten",
     "continue-exploring": "Weiter erkunden",

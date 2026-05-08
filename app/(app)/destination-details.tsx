@@ -16,7 +16,7 @@ import { GoogleMapCard } from '../../src/components/GoogleMapCard';
 export default function DestinationDetailsScreen() {
   const router = useRouter();
   const { id } = useLocalSearchParams<{ id: string }>();
-  const { addFavorite, addTripItem, isFavorited, isInTripPlan, tripPlan } = useAppContext();
+  const { addFavorite, isFavorited } = useAppContext();
   const { i18n, t } = useTranslation();
 
   const destination = destinations.find((item) => item.id === id);
@@ -31,7 +31,6 @@ export default function DestinationDetailsScreen() {
 
   const locale = i18n.language === 'de' ? 'de' : 'en';
   const isFav = isFavorited('destination', destination.id);
-  const isPlanned = isInTripPlan('destination', destination.id);
   const extra = destinationInsights[destination.id as keyof typeof destinationInsights];
   const point = destinationMapPoints[destination.id];
 
@@ -132,15 +131,6 @@ export default function DestinationDetailsScreen() {
               params: { destination: destination.id },
             } as never)
           }
-        />
-        <Button
-          title={isPlanned ? (locale === 'de' ? 'In trip plan' : 'In trip plan') : locale === 'de' ? 'Add to plan' : 'Add to plan'}
-          onPress={() => {
-            void addTripItem('destination', destination.id, Math.min(14, tripPlan.length + 1));
-          }}
-          disabled={isPlanned}
-          variant="outline"
-          style={styles.secondaryButton}
         />
         <Button
           title={locale === 'de' ? 'Ask concierge' : 'Ask concierge'}

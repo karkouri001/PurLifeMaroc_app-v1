@@ -39,7 +39,7 @@ type FavoriteGroup = {
 
 export default function FavoritesTab() {
   const router = useRouter();
-  const { favorites, tripPlan, removeFavorite, addTripItem, isInTripPlan } = useAppContext();
+  const { favorites, removeFavorite } = useAppContext();
   const { i18n } = useTranslation();
   const locale = i18n.language === 'de' ? 'de' : 'en';
   const topSpacing = useTopSpacing(theme.spacing.lg);
@@ -165,11 +165,11 @@ export default function FavoritesTab() {
       return `${item.duration} | ${item.category}`;
     }
 
-    if ('pricePerNight' in item) {
-      return item.pricePerNight;
+    if ('stayStyle' in item) {
+      return item.stayStyle;
     }
 
-    return item.priceRange;
+    return item.atmosphere;
   };
 
   const openItem = (entry: FavoriteResolvedItem) => {
@@ -240,8 +240,8 @@ export default function FavoritesTab() {
             title={locale === 'de' ? 'Saved items with a purpose' : 'Saved items with a purpose'}
             description={
               locale === 'de'
-                ? 'Gespeicherte Inhalte dienen nicht nur zum Wiederfinden. Sie koennen als Shortlist fuer eine Concierge-Anfrage und als schnelle Routenbasis genutzt werden.'
-                : 'Saved items are more than bookmarks. They work as a shortlist for concierge outreach and as a quick route basis.'
+                ? 'Gespeicherte Inhalte dienen nicht nur zum Wiederfinden. Sie koennen als Shortlist fuer eine Concierge-Anfrage und schnelle Informationssichtung genutzt werden.'
+                : 'Saved items are more than bookmarks. They work as a shortlist for concierge outreach and quick information review.'
             }
             chips={[
               `${favorites.length} ${locale === 'de' ? 'gespeichert' : 'saved'}`,
@@ -269,8 +269,8 @@ export default function FavoritesTab() {
             </Text>
             <Text style={styles.utilityText}>
               {locale === 'de'
-                ? '1. They reopen useful details quickly. 2. They give the concierge immediate context. 3. They can be turned into a simple trip plan.'
-                : '1. They reopen useful details quickly. 2. They give the concierge immediate context. 3. They can be turned into a simple trip plan.'}
+                ? '1. They reopen useful details quickly. 2. They give the concierge immediate context. 3. They keep your information request focused.'
+                : '1. They reopen useful details quickly. 2. They give the concierge immediate context. 3. They keep your information request focused.'}
             </Text>
             <View style={styles.utilityActions}>
               <Button
@@ -286,12 +286,6 @@ export default function FavoritesTab() {
                   } as never)
                 }
                 style={styles.utilityButton}
-              />
-              <Button
-                title={locale === 'de' ? 'Open trip planner' : 'Open trip planner'}
-                onPress={() => router.push('/(app)/trip-planner' as never)}
-                variant="secondary"
-                style={styles.utilitySecondaryButton}
               />
             </View>
           </View>
@@ -331,23 +325,6 @@ export default function FavoritesTab() {
                         {locale === 'de' ? 'Ask concierge' : 'Ask concierge'}
                       </Text>
                     </TouchableOpacity>
-
-                    {!isInTripPlan(entry.type, entry.item.id) ? (
-                      <TouchableOpacity
-                        onPress={() => {
-                          void addTripItem(
-                            entry.type,
-                            entry.item.id,
-                            Math.min(14, tripPlan.length + 1)
-                          );
-                        }}
-                        style={styles.actionButton}
-                      >
-                        <Text style={styles.actionButtonText}>
-                          {locale === 'de' ? 'Add to plan' : 'Add to plan'}
-                        </Text>
-                      </TouchableOpacity>
-                    ) : null}
 
                     <TouchableOpacity
                       onPress={() => removeFavorite(entry.favoriteId)}

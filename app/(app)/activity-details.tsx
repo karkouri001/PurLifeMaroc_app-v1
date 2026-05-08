@@ -13,7 +13,7 @@ import { destinationMapPoints } from '../../src/data/contentDetails';
 export default function ActivityDetailsScreen() {
   const router = useRouter();
   const { id } = useLocalSearchParams<{ id: string }>();
-  const { addFavorite, addTripItem, isFavorited, isInTripPlan, tripPlan } = useAppContext();
+  const { addFavorite, isFavorited } = useAppContext();
   const { i18n, t } = useTranslation();
 
   const activity = activities.find((item) => item.id === id);
@@ -32,7 +32,6 @@ export default function ActivityDetailsScreen() {
 
   const locale = i18n.language === 'de' ? 'de' : 'en';
   const isFav = isFavorited('activity', activity.id);
-  const isPlanned = isInTripPlan('activity', activity.id);
 
   return (
     <View style={styles.container}>
@@ -66,7 +65,7 @@ export default function ActivityDetailsScreen() {
               ? `Destination: ${locale === 'de' ? destination.nameDe : destination.nameEn}`
               : undefined
           }
-          chips={[activity.duration, activity.priceRange]}
+          chips={[activity.duration, activity.category]}
           imageSource={getActivityImage(activity.image)}
         />
 
@@ -86,7 +85,7 @@ export default function ActivityDetailsScreen() {
         <View style={styles.statsRow}>
           <StatChip label={t('screens.duration')} value={activity.duration} />
           <View style={styles.spacer} />
-          <StatChip label={t('activities.price')} value={activity.priceRange} />
+          <StatChip label={t('activities.category')} value={activity.category} />
         </View>
 
         <Card>
@@ -98,21 +97,13 @@ export default function ActivityDetailsScreen() {
           <Text style={styles.sectionLabel}>Why travelers pick it</Text>
           <Text style={styles.bodyText}>
             {locale === 'de'
-              ? 'Die Karte macht Dauer, Preisniveau und Reiseziel sofort sichtbar und hilft so bei der schnellen Auswahl.'
-              : 'The card makes timing, price range, and destination visible at once, which helps the traveler compare options quickly.'}
+              ? activity.serviceNote
+              : activity.serviceNote}
           </Text>
         </Card>
       </ScrollView>
 
       <View style={styles.footer}>
-        <Button
-          title={isPlanned ? (locale === 'de' ? 'In trip plan' : 'In trip plan') : locale === 'de' ? 'Add to plan' : 'Add to plan'}
-          onPress={() => {
-            void addTripItem('activity', activity.id, Math.min(14, tripPlan.length + 1));
-          }}
-          disabled={isPlanned}
-          variant="outline"
-        />
         <Button
           title={locale === 'de' ? 'Ask concierge about this' : 'Ask concierge about this'}
           onPress={() =>

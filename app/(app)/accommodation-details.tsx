@@ -13,7 +13,7 @@ import { destinationMapPoints } from '../../src/data/contentDetails';
 export default function AccommodationDetailsScreen() {
   const router = useRouter();
   const { id } = useLocalSearchParams<{ id: string }>();
-  const { addFavorite, addTripItem, isFavorited, isInTripPlan, tripPlan } = useAppContext();
+  const { addFavorite, isFavorited } = useAppContext();
   const { i18n, t } = useTranslation();
 
   const accommodation = accommodations.find((item) => item.id === id);
@@ -34,7 +34,6 @@ export default function AccommodationDetailsScreen() {
 
   const locale = i18n.language === 'de' ? 'de' : 'en';
   const isFav = isFavorited('accommodation', accommodation.id);
-  const isPlanned = isInTripPlan('accommodation', accommodation.id);
 
   return (
     <View style={styles.container}>
@@ -72,7 +71,7 @@ export default function AccommodationDetailsScreen() {
               ? `Destination: ${locale === 'de' ? destination.nameDe : destination.nameEn}`
               : undefined
           }
-          chips={[accommodation.category, accommodation.pricePerNight]}
+          chips={[accommodation.category, accommodation.stayStyle]}
           imageSource={getAccommodationImage(accommodation.image)}
         />
 
@@ -95,8 +94,8 @@ export default function AccommodationDetailsScreen() {
         </Card>
 
         <Card>
-          <Text style={styles.sectionLabel}>{t('screens.price-per-night')}</Text>
-          <Text style={styles.primaryValue}>{accommodation.pricePerNight}</Text>
+          <Text style={styles.sectionLabel}>Pur Life Living style</Text>
+          <Text style={styles.primaryValue}>{accommodation.stayStyle}</Text>
         </Card>
 
         <Card>
@@ -120,18 +119,6 @@ export default function AccommodationDetailsScreen() {
       </ScrollView>
 
       <View style={styles.footer}>
-        <Button
-          title={isPlanned ? (locale === 'de' ? 'In trip plan' : 'In trip plan') : locale === 'de' ? 'Add to plan' : 'Add to plan'}
-          onPress={() => {
-            void addTripItem(
-              'accommodation',
-              accommodation.id,
-              Math.min(14, tripPlan.length + 1)
-            );
-          }}
-          disabled={isPlanned}
-          variant="outline"
-        />
         <Button
           title={locale === 'de' ? 'Ask about this stay' : 'Ask about this stay'}
           onPress={() =>

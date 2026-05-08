@@ -194,22 +194,12 @@ export class RecommendationEngine {
       destinationIds.includes(accommodation.destination)
     );
 
-    const budgetFiltered = destinationMatches.filter((accommodation) =>
-      this.matchesBudget(accommodation, preferences.budget)
-    );
-
-    const pool = budgetFiltered.length > 0 ? budgetFiltered : destinationMatches;
-
-    return pool
+    return destinationMatches
       .map((accommodation, index) => {
         let score = 0;
 
         if (preferences.accommodationPreference === accommodation.category) {
           score += 30;
-        }
-
-        if (this.matchesBudget(accommodation, preferences.budget)) {
-          score += 22;
         }
 
         if (preferences.duration === 'weekend' && accommodation.category !== 'camp') {
@@ -228,43 +218,6 @@ export class RecommendationEngine {
       .map(({ accommodation }) => accommodation);
   }
 
-  private static parseAccommodationPrice(pricePerNight: string): number {
-    const values = pricePerNight.match(/\d+/g)?.map(Number) || [];
-
-    if (values.length === 0) {
-      return 0;
-    }
-
-    if (values.length === 1) {
-      return values[0];
-    }
-
-    return Math.round((values[0] + values[1]) / 2);
-  }
-
-  private static matchesBudget(
-    accommodation: Accommodation,
-    budget: UserPreferences['budget']
-  ): boolean {
-    if (!budget) {
-      return true;
-    }
-
-    const budgetPriceMap: Record<
-      NonNullable<UserPreferences['budget']>,
-      { min: number; max: number }
-    > = {
-      budget: { min: 0, max: 110 },
-      mid: { min: 90, max: 190 },
-      luxury: { min: 170, max: 999 },
-    };
-
-    const price = this.parseAccommodationPrice(accommodation.pricePerNight);
-    const budgetRange = budgetPriceMap[budget];
-
-    return price >= budgetRange.min && price <= budgetRange.max;
-  }
-
   private static isShortActivity(duration: string): boolean {
     return /hours|1\.5|2|3|4/.test(duration.toLowerCase()) && !/day/.test(duration.toLowerCase());
   }
@@ -276,7 +229,6 @@ export class RecommendationEngine {
   private static generateExplanation(preferences: UserPreferences): string {
     const styleName = preferences.travelStyle || 'custom';
     const durationText = preferences.duration || 'flexible';
-    const budgetText = preferences.budget || 'mid-range';
 
     const explanations: { [key: string]: string } = {
       curator:
@@ -322,7 +274,7 @@ export class RecommendationEngine {
       ? ` Stay matching also respects your ${preferences.accommodationPreference} preference.`
       : '';
 
-    return `${baseExplanation} It reflects your ${durationText} trip length and ${budgetText} budget.${interestText}${destinationText}${stayText}`;
+    return `${baseExplanation} It reflects your ${durationText} trip length without exposing commercial ranges to the guest.${interestText}${destinationText}${stayText}`;
   }
 }
 

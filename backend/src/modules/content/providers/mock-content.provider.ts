@@ -76,7 +76,7 @@ const activities: ActivityDto[] = [
     category: 'Cultural',
     image: 'jardin-majorelle.png',
     duration: '2 hours',
-    priceRange: '$25-$40',
+    serviceNote: 'Design, gardens, and cultural context for a Marrakesh stay.',
   },
   {
     id: 'boat-tour',
@@ -88,7 +88,7 @@ const activities: ActivityDto[] = [
     category: 'Beach & Water',
     image: 'boat-tour.png',
     duration: '2 hours',
-    priceRange: '$20-$35',
+    serviceNote: 'Atlantic leisure reference for a relaxed coastal day.',
   },
   {
     id: 'medina-walk-fez',
@@ -100,7 +100,7 @@ const activities: ActivityDto[] = [
     category: 'Cultural',
     image: 'medina-walk-fez.png',
     duration: 'Half day',
-    priceRange: '$30-$50',
+    serviceNote: 'Heritage and craft context for culture-focused guests.',
   },
 ];
 
@@ -115,7 +115,7 @@ const accommodations: AccommodationDto[] = [
     category: 'luxury',
     image: 'palais-ronsard.png',
     amenities: ['Spa', 'Pool', 'Private garden'],
-    pricePerNight: '$260-$380',
+    stayStyle: 'Luxury Living',
   },
   {
     id: 'villa-maroc',
@@ -127,7 +127,7 @@ const accommodations: AccommodationDto[] = [
     category: 'boutique',
     image: 'villa-maroc.png',
     amenities: ['Terrace', 'Breakfast', 'Local decor'],
-    pricePerNight: '$120-$180',
+    stayStyle: 'Experience Living',
   },
   {
     id: 'riad-fes',
@@ -139,7 +139,7 @@ const accommodations: AccommodationDto[] = [
     category: 'luxury',
     image: 'riad-fes.png',
     amenities: ['Spa', 'Rooftop', 'Fine dining'],
-    pricePerNight: '$220-$320',
+    stayStyle: 'Luxury Living',
   },
 ];
 
@@ -154,7 +154,7 @@ const restaurants: RestaurantDto[] = [
     cuisine: 'Moroccan contemporary',
     image: 'kasbah-lamrani.png',
     specialties: ['Tagine', 'Seasonal tasting', 'Tea service'],
-    priceRange: '$35-$70',
+    atmosphere: 'Refined Moroccan dining',
   },
   {
     id: 'umia',
@@ -166,7 +166,7 @@ const restaurants: RestaurantDto[] = [
     cuisine: 'Fusion',
     image: 'umia.png',
     specialties: ['Seafood', 'Salads', 'Creative plates'],
-    priceRange: '$25-$50',
+    atmosphere: 'Coastal and relaxed',
   },
 ];
 

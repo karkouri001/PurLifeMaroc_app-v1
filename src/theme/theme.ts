@@ -1,4 +1,4 @@
-import { Dimensions, PixelRatio, Platform } from 'react-native';
+import { Dimensions, PixelRatio } from 'react-native';
 
 const { width: screenWidth } = Dimensions.get('window');
 const fontScale = PixelRatio.getFontScale();
@@ -9,45 +9,52 @@ const scaleFont = (size: number) =>
 
 const scaleSpace = (size: number) => Math.round(size * compactScale);
 
-const serifFamily = Platform.select({
-  ios: 'Georgia',
-  android: 'serif',
-  default: 'Georgia',
-});
+export const fonts = {
+  display: 'Sabana',
+  body: 'WorkSans-Regular',
+  bodyItalic: 'WorkSans-Italic',
+  medium: 'WorkSans-Medium',
+  semiBold: 'WorkSans-SemiBold',
+  bold: 'WorkSans-Bold',
+  support: 'Verdana',
+  supportBold: 'Verdana-Bold',
+};
 
 // Centralized theme file
 export const colors = {
-  primary: '#B85C38',
-  primaryLight: '#D28359',
-  primaryDark: '#8D4223',
+  primary: '#DB7F32',
+  primaryLight: 'rgba(219, 127, 50, 0.14)',
+  primaryDark: '#DB7F32',
 
-  black: '#17120E',
+  black: '#000000',
   white: '#FFFFFF',
-  lightGray: '#F5EFE9',
-  gray: '#8F8376',
-  darkGray: '#3B2D24',
+  lightGray: 'rgba(0, 0, 0, 0.06)',
+  gray: 'rgba(0, 0, 0, 0.42)',
+  darkGray: '#000000',
 
-  gold: '#C79A5C',
-  beige: '#EAE0D4',
-  earth: '#88644A',
-  cream: '#FBF6F0',
-  sand: '#D9C1A5',
-  olive: '#6C6E4E',
-  surfaceDark: '#201712',
-  overlay: '#F1E4D5',
+  gold: '#DB7F32',
+  beige: 'rgba(219, 127, 50, 0.1)',
+  earth: '#000000',
+  cream: '#FFFFFF',
+  sand: 'rgba(0, 0, 0, 0.08)',
+  olive: '#000000',
+  ocean: '#000000',
+  sky: '#FFFFFF',
+  surfaceDark: '#000000',
+  overlay: 'rgba(219, 127, 50, 0.1)',
 
-  success: '#3F7D4B',
-  error: '#B44C3C',
-  warning: '#C9862B',
-  info: '#3B6997',
+  success: '#000000',
+  error: '#DB7F32',
+  warning: '#DB7F32',
+  info: '#000000',
 
-  border: '#E2D5C7',
-  background: '#FBF6F0',
-  surface: '#FFFDFC',
-  surfaceAlt: '#F3E8DC',
-  textPrimary: '#17120E',
-  textSecondary: '#6F6258',
-  textMuted: '#9A8C80',
+  border: 'rgba(0, 0, 0, 0.14)',
+  background: '#FFFFFF',
+  surface: '#FFFFFF',
+  surfaceAlt: 'rgba(0, 0, 0, 0.045)',
+  textPrimary: '#000000',
+  textSecondary: 'rgba(0, 0, 0, 0.68)',
+  textMuted: 'rgba(0, 0, 0, 0.42)',
   textLight: '#FFFFFF',
 };
 
@@ -66,35 +73,56 @@ export const typography = {
     fontSize: scaleFont(34),
     fontWeight: '700' as const,
     lineHeight: scaleFont(42),
-    fontFamily: serifFamily,
+    fontFamily: fonts.display,
   },
   h2: {
     fontSize: scaleFont(30),
     fontWeight: '700' as const,
     lineHeight: scaleFont(38),
-    fontFamily: serifFamily,
+    fontFamily: fonts.display,
   },
   h3: {
     fontSize: scaleFont(26),
     fontWeight: '700' as const,
     lineHeight: scaleFont(34),
-    fontFamily: serifFamily,
+    fontFamily: fonts.display,
   },
   h4: {
     fontSize: scaleFont(22),
     fontWeight: '700' as const,
     lineHeight: scaleFont(30),
-    fontFamily: serifFamily,
+    fontFamily: fonts.display,
   },
-  h5: { fontSize: scaleFont(18), fontWeight: '600' as const, lineHeight: scaleFont(25) },
-  body: { fontSize: scaleFont(16), fontWeight: '400' as const, lineHeight: scaleFont(24) },
-  bodySmall: { fontSize: scaleFont(14), fontWeight: '400' as const, lineHeight: scaleFont(21) },
-  caption: { fontSize: scaleFont(12), fontWeight: '500' as const, lineHeight: scaleFont(16) },
+  h5: {
+    fontSize: scaleFont(18),
+    fontWeight: '600' as const,
+    lineHeight: scaleFont(25),
+    fontFamily: fonts.semiBold,
+  },
+  body: {
+    fontSize: scaleFont(16),
+    fontWeight: '400' as const,
+    lineHeight: scaleFont(24),
+    fontFamily: fonts.body,
+  },
+  bodySmall: {
+    fontSize: scaleFont(14),
+    fontWeight: '400' as const,
+    lineHeight: scaleFont(21),
+    fontFamily: fonts.body,
+  },
+  caption: {
+    fontSize: scaleFont(12),
+    fontWeight: '500' as const,
+    lineHeight: scaleFont(16),
+    fontFamily: fonts.medium,
+  },
   overline: {
     fontSize: scaleFont(11),
     fontWeight: '700' as const,
     lineHeight: scaleFont(14),
     letterSpacing: 0.8,
+    fontFamily: fonts.bold,
   },
 };
 
@@ -116,30 +144,31 @@ export const shadows = {
     elevation: 0,
   },
   sm: {
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
-    elevation: 2,
+    shadowColor: 'transparent',
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0,
+    shadowRadius: 0,
+    elevation: 0,
   },
   md: {
-    shadowColor: '#3F2B1F',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.08,
-    shadowRadius: 10,
-    elevation: 4,
+    shadowColor: 'transparent',
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0,
+    shadowRadius: 0,
+    elevation: 0,
   },
   lg: {
-    shadowColor: '#3F2B1F',
-    shadowOffset: { width: 0, height: 10 },
-    shadowOpacity: 0.12,
-    shadowRadius: 16,
-    elevation: 6,
+    shadowColor: 'transparent',
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0,
+    shadowRadius: 0,
+    elevation: 0,
   },
 };
 
 export const theme = {
   colors,
+  fonts,
   spacing,
   typography,
   radius,

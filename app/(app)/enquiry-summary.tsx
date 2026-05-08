@@ -119,9 +119,6 @@ export default function EnquirySummaryScreen() {
           {enquiry.duration ? (
             <SummaryRow label={t('screens.duration')} value={enquiry.duration} />
           ) : null}
-          {enquiry.budget ? (
-            <SummaryRow label={t('screens.budget-range')} value={enquiry.budget} />
-          ) : null}
           <SummaryRow
             label={locale === 'de' ? 'Message' : 'Message'}
             value={enquiry.specialRequests}

@@ -34,8 +34,7 @@ const TabNavigator = () => {
         tabBarInactiveTintColor: theme.colors.gray,
         tabBarStyle: {
           backgroundColor: theme.colors.surface,
-          borderTopColor: theme.colors.border,
-          borderTopWidth: 1,
+          borderTopWidth: 0,
           paddingTop: 8,
           paddingBottom: Math.max(insets.bottom, 8),
           height: 60 + Math.max(insets.bottom, 8),
@@ -44,6 +43,7 @@ const TabNavigator = () => {
         tabBarLabelStyle: {
           fontSize: 11,
           fontWeight: '600',
+          fontFamily: theme.fonts.medium,
         },
       })}
     >

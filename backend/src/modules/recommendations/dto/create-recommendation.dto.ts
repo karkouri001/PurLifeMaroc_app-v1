@@ -7,11 +7,6 @@ export class CreateRecommendationDto {
   @IsString()
   travelStyle?: string;
 
-  @ApiPropertyOptional({ enum: ['budget', 'mid', 'luxury'] })
-  @IsOptional()
-  @IsIn(['budget', 'mid', 'luxury'])
-  budget?: 'budget' | 'mid' | 'luxury';
-
   @ApiPropertyOptional({ enum: ['weekend', 'week', 'twoweeks', 'month'] })
   @IsOptional()
   @IsIn(['weekend', 'week', 'twoweeks', 'month'])

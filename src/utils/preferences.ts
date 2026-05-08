@@ -19,17 +19,6 @@ export const getTravelStyleLabel = (
   return language === 'de' ? match.nameDe : match.nameEn;
 };
 
-export const getBudgetLabel = (
-  budget: UserPreferences['budget'],
-  t: Translator
-): string | null => {
-  if (!budget) {
-    return null;
-  }
-
-  return t(`onboarding.budget.${budget}`);
-};
-
 export const getDurationLabel = (
   duration: UserPreferences['duration'],
   t: Translator
@@ -93,7 +82,6 @@ export const buildPreferenceSignals = (
 
   const signals: string[] = [];
   const travelStyle = getTravelStyleLabel(preferences.travelStyle, language);
-  const budget = getBudgetLabel(preferences.budget, t);
   const duration = getDurationLabel(preferences.duration, t);
   const accommodation = getAccommodationLabel(
     preferences.accommodationPreference,
@@ -124,10 +112,6 @@ export const buildPreferenceSignals = (
     signals.push(`${t('screens.duration')}: ${duration}`);
   }
 
-  if (budget) {
-    signals.push(`${t('screens.budget')}: ${budget}`);
-  }
-
   if (accommodation) {
     signals.push(`${t('navigation.accommodation')}: ${accommodation}`);
   }
@@ -139,14 +123,14 @@ export const buildPreferenceUsageNotes = (language: string): string[] => {
   if (language === 'de') {
     return [
       'Reisestil, Interessen und Aufenthaltsdauer steuern die Reihenfolge der Empfehlungen.',
-      'Budget und Unterkunftsstil priorisieren passende Aufenthalte statt zufaellige Ergebnisse.',
+      'Der Unterkunftsstil priorisiert passende Aufenthalte statt zufaellige Ergebnisse.',
       'Bevorzugte Ziele werden in den Concierge-Ablauf uebernommen, damit die E-Mail-Anfrage mit echtem Kontext startet.',
     ];
   }
 
   return [
     'Travel style, interests, and trip length rank destinations and activities for the user.',
-    'Budget and stay style prioritize accommodation that fits the traveler instead of showing a generic list.',
+    'Stay style prioritizes accommodation that fits the traveler instead of showing a generic list.',
     'Preferred destinations carry into the concierge flow so the email request starts with real context.',
   ];
 };

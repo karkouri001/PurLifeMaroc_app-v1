@@ -20,6 +20,8 @@ type GoogleMapCardProps = {
   points: MapPoint[];
   mode?: 'place' | 'route';
   height?: number;
+  startFromCurrentLocation?: boolean;
+  showPointLabels?: boolean;
 };
 
 const formatCoordinates = (point: MapPoint) => `${point.latitude},${point.longitude}`;
@@ -44,19 +46,32 @@ const buildPreviewUrl = (points: MapPoint[], mode: 'place' | 'route') => {
   return `https://maps.google.com/maps?q=${encodeURIComponent(buildPlaceQuery(points[0]))}&z=13&output=embed`;
 };
 
-const buildOpenUrl = (points: MapPoint[], mode: 'place' | 'route') => {
+const buildOpenUrl = (
+  points: MapPoint[],
+  mode: 'place' | 'route',
+  startFromCurrentLocation: boolean
+) => {
   if (mode === 'route' && points.length > 1) {
-    const origin = formatCoordinates(points[0]);
     const destination = formatCoordinates(points[points.length - 1]);
-    const middleStops = points
-      .slice(1, -1)
+    const stopPoints = startFromCurrentLocation ? points.slice(0, -1) : points.slice(1, -1);
+    const middleStops = stopPoints
       .map(formatCoordinates)
       .join('|');
+    const origin = startFromCurrentLocation
+      ? ''
+      : `&origin=${encodeURIComponent(formatCoordinates(points[0]))}`;
 
-    return `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(origin)}&destination=${encodeURIComponent(destination)}${middleStops ? `&waypoints=${encodeURIComponent(middleStops)}` : ''}&travelmode=driving`;
+    return `https://www.google.com/maps/dir/?api=1${origin}&destination=${encodeURIComponent(destination)}${middleStops ? `&waypoints=${encodeURIComponent(middleStops)}` : ''}&travelmode=driving`;
   }
 
   const point = points[0];
+
+  if (startFromCurrentLocation) {
+    return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
+      buildPlaceQuery(point)
+    )}&travelmode=driving`;
+  }
+
   if (point.googleMapsUrl) {
     return point.googleMapsUrl;
   }
@@ -85,7 +100,7 @@ const buildIframeHtml = (previewUrl: string) => `<!DOCTYPE html>
         width: 100%;
         height: 100%;
         overflow: hidden;
-        background: #f4efe6;
+        background: #ffffff;
       }
 
       iframe {
@@ -111,14 +126,21 @@ export function GoogleMapCard({
   points,
   mode = 'place',
   height = 210,
+  startFromCurrentLocation = mode === 'route',
+  showPointLabels = false,
 }: GoogleMapCardProps) {
   if (points.length === 0) {
     return null;
   }
 
   const previewUrl = buildPreviewUrl(points, mode);
-  const openUrl = buildOpenUrl(points, mode);
+  const openUrl = buildOpenUrl(points, mode, startFromCurrentLocation);
   const previewHtml = buildIframeHtml(previewUrl);
+  const openLabel = startFromCurrentLocation
+    ? 'Open live directions'
+    : mode === 'route' && points.length > 1
+      ? 'Open route in Google Maps'
+      : 'Open in Google Maps';
 
   return (
     <View style={styles.container}>
@@ -159,7 +181,9 @@ export function GoogleMapCard({
               <Text style={styles.googleBadgeText}>Google</Text>
             </View>
             <View style={styles.overlayButton}>
-              <Text style={styles.overlayButtonText}>Open</Text>
+              <Text style={styles.overlayButtonText}>
+                {startFromCurrentLocation ? 'Directions' : 'Open'}
+              </Text>
             </View>
           </TouchableOpacity>
         </View>
@@ -178,13 +202,15 @@ export function GoogleMapCard({
         </TouchableOpacity>
       )}
 
-      <View style={styles.pointRow}>
-        {points.map((point, index) => (
-          <View key={`${point.id}-${index}`} style={styles.pointChip}>
-            <Text style={styles.pointChipText}>{point.label}</Text>
-          </View>
-        ))}
-      </View>
+      {showPointLabels ? (
+        <View style={styles.pointRow}>
+          {points.map((point, index) => (
+            <View key={`${point.id}-${index}`} style={styles.pointChip}>
+              <Text style={styles.pointChipText}>{point.label}</Text>
+            </View>
+          ))}
+        </View>
+      ) : null}
 
       <TouchableOpacity
         style={styles.openButton}
@@ -193,11 +219,7 @@ export function GoogleMapCard({
         }}
         activeOpacity={0.85}
       >
-        <Text style={styles.openButtonText}>
-          {mode === 'route' && points.length > 1
-            ? 'Open route in Google Maps'
-            : 'Open in Google Maps'}
-        </Text>
+        <Text style={styles.openButtonText}>{openLabel}</Text>
       </TouchableOpacity>
     </View>
   );
@@ -222,11 +244,10 @@ const styles = StyleSheet.create({
   },
   mapWrap: {
     overflow: 'hidden',
-    borderRadius: theme.radius.xl,
-    borderWidth: 1,
-    borderColor: theme.colors.border,
-    backgroundColor: theme.colors.surface,
+    borderRadius: theme.radius.md,
+    backgroundColor: theme.colors.surfaceAlt,
     position: 'relative',
+    ...theme.shadows.none,
   },
   map: {
     flex: 1,
@@ -244,12 +265,10 @@ const styles = StyleSheet.create({
     paddingVertical: theme.spacing.sm,
     borderRadius: theme.radius.full,
     backgroundColor: 'rgba(255,255,255,0.92)',
-    borderWidth: 1,
-    borderColor: 'rgba(0,0,0,0.08)',
   },
   googleBadgeText: {
     ...theme.typography.caption,
-    color: '#202124',
+    color: theme.colors.black,
     fontWeight: '700',
   },
   overlayButton: {
@@ -258,12 +277,10 @@ const styles = StyleSheet.create({
     paddingVertical: theme.spacing.sm,
     borderRadius: theme.radius.full,
     backgroundColor: 'rgba(255,255,255,0.94)',
-    borderWidth: 1,
-    borderColor: 'rgba(0,0,0,0.08)',
   },
   overlayButtonText: {
     ...theme.typography.caption,
-    color: '#202124',
+    color: theme.colors.black,
     fontWeight: '700',
   },
   loadingState: {
@@ -278,12 +295,11 @@ const styles = StyleSheet.create({
     marginTop: theme.spacing.sm,
   },
   webFallback: {
-    borderRadius: theme.radius.xl,
-    borderWidth: 1,
-    borderColor: theme.colors.border,
-    backgroundColor: theme.colors.surface,
+    borderRadius: theme.radius.md,
+    backgroundColor: theme.colors.surfaceAlt,
     padding: theme.spacing.xl,
     justifyContent: 'center',
+    ...theme.shadows.none,
   },
   webFallbackTitle: {
     ...theme.typography.h5,
@@ -304,9 +320,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: theme.spacing.md,
     paddingVertical: theme.spacing.sm,
     borderRadius: theme.radius.full,
-    backgroundColor: theme.colors.surface,
-    borderWidth: 1,
-    borderColor: theme.colors.border,
+    backgroundColor: theme.colors.surfaceAlt,
     marginRight: theme.spacing.sm,
     marginBottom: theme.spacing.sm,
   },

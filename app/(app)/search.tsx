@@ -13,21 +13,16 @@ import { Button, Card, Header, HeroBanner } from '../../src/components/Common';
 import { useAppContext } from '../../src/store/AppContext';
 import { theme } from '../../src/theme/theme';
 import { destinations } from '../../src/data/mockData';
-import { ContentType, UserPreferences } from '../../src/types';
+import { ContentType } from '../../src/types';
 import {
   contentTypes,
-  findContentItem,
   getContentCollection,
   getContentItemDescription,
   getContentItemName,
   getContentMeta,
-  getContentPriceLabel,
   getContentTypeLabel,
   getDestinationIdForContent,
-  matchesBudgetLabel,
 } from '../../src/utils/content';
-
-type SearchBudgetFilter = UserPreferences['budget'] | 'all';
 
 type SearchEntry = {
   type: ContentType;
@@ -41,11 +36,10 @@ type SearchEntry = {
 export default function SearchScreen() {
   const router = useRouter();
   const { i18n } = useTranslation();
-  const { addFavorite, addTripItem, isFavorited, isInTripPlan, tripPlan } = useAppContext();
+  const { addFavorite, isFavorited } = useAppContext();
   const [query, setQuery] = useState('');
   const [selectedTypes, setSelectedTypes] = useState<ContentType[]>(contentTypes);
   const [selectedDestinationId, setSelectedDestinationId] = useState<string | null>(null);
-  const [selectedBudget, setSelectedBudget] = useState<SearchBudgetFilter>('all');
 
   const locale = i18n.language === 'de' ? 'de' : 'en';
 
@@ -84,14 +78,11 @@ export default function SearchScreen() {
               }
             }
 
-            const sourceItem = findContentItem(type, entry.itemId);
-            const priceLabel = sourceItem ? getContentPriceLabel(type, sourceItem) : null;
-
-            return matchesBudgetLabel(priceLabel, selectedBudget);
+            return true;
           });
       })
       .sort((first, second) => first.title.localeCompare(second.title));
-  }, [locale, query, selectedBudget, selectedDestinationId, selectedTypes]);
+  }, [locale, query, selectedDestinationId, selectedTypes]);
 
   const toggleType = (type: ContentType) => {
     setSelectedTypes((current) =>
@@ -129,10 +120,6 @@ export default function SearchScreen() {
     router.push('/(app)/eat-drink' as never);
   };
 
-  const addResultToPlan = async (entry: SearchEntry) => {
-    await addTripItem(entry.type, entry.itemId, Math.min(14, tripPlan.length + 1));
-  };
-
   const saveResult = async (entry: SearchEntry) => {
     await addFavorite(entry.type, entry.itemId);
   };
@@ -159,8 +146,8 @@ export default function SearchScreen() {
           title={locale === 'de' ? 'One place to narrow the trip' : 'One place to narrow the trip'}
           description={
             locale === 'de'
-              ? 'Search across all key categories and trim the list by type, destination, and price level.'
-              : 'Search across all key categories and trim the list by type, destination, and price level.'
+              ? 'Search across all key categories and trim the list by type and destination.'
+              : 'Search across all key categories and trim the list by type and destination.'
           }
           chips={[
             `${selectedTypes.length} ${locale === 'de' ? 'types' : 'types'}`,
@@ -248,37 +235,6 @@ export default function SearchScreen() {
           </ScrollView>
         </View>
 
-        <View style={styles.filtersSection}>
-          <Text style={styles.filterTitle}>{locale === 'de' ? 'Budget' : 'Budget'}</Text>
-          <View style={styles.chipRow}>
-            {[
-              { id: 'all', labelEn: 'All', labelDe: 'All' },
-              { id: 'budget', labelEn: 'Value', labelDe: 'Value' },
-              { id: 'mid', labelEn: 'Balanced', labelDe: 'Balanced' },
-              { id: 'luxury', labelEn: 'Premium', labelDe: 'Premium' },
-            ].map((entry) => {
-              const active = selectedBudget === entry.id;
-
-              return (
-                <TouchableOpacity
-                  key={entry.id}
-                  onPress={() => setSelectedBudget(entry.id as SearchBudgetFilter)}
-                  style={[styles.filterChip, active ? styles.filterChipActive : undefined]}
-                >
-                  <Text
-                    style={[
-                      styles.filterChipText,
-                      active ? styles.filterChipTextActive : undefined,
-                    ]}
-                  >
-                    {locale === 'de' ? entry.labelDe : entry.labelEn}
-                  </Text>
-                </TouchableOpacity>
-              );
-            })}
-          </View>
-        </View>
-
         <Text style={styles.resultsCount}>
           {locale === 'de'
             ? `${results.length} curated matches`
@@ -300,7 +256,6 @@ export default function SearchScreen() {
 
         {results.map((entry) => {
           const saved = isFavorited(entry.type, entry.itemId);
-          const planned = isInTripPlan(entry.type, entry.itemId);
 
           return (
             <View key={`${entry.type}-${entry.itemId}`}>
@@ -330,16 +285,6 @@ export default function SearchScreen() {
                     size="small"
                     variant="secondary"
                     disabled={saved}
-                    style={styles.inlineButton}
-                  />
-                  <Button
-                    title={planned ? (locale === 'de' ? 'In plan' : 'In plan') : locale === 'de' ? 'Add to plan' : 'Add to plan'}
-                    onPress={() => {
-                      void addResultToPlan(entry);
-                    }}
-                    size="small"
-                    variant="outline"
-                    disabled={planned}
                     style={styles.inlineButton}
                   />
                 </View>

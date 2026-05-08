@@ -5,7 +5,6 @@ import {
   Favorite,
   Enquiry,
   ContentType,
-  TripPlanItem,
   UISettings,
 } from '../types';
 
@@ -23,14 +22,6 @@ interface AppContextType {
   addFavorite: (type: ContentType, itemId: string) => Promise<void>;
   removeFavorite: (id: string) => Promise<void>;
   isFavorited: (type: ContentType, itemId: string) => boolean;
-
-  // Trip planner
-  tripPlan: TripPlanItem[];
-  addTripItem: (type: ContentType, itemId: string, day?: number) => Promise<void>;
-  removeTripItem: (id: string) => Promise<void>;
-  updateTripItemDay: (id: string, day: number) => Promise<void>;
-  clearTripPlan: () => Promise<void>;
-  isInTripPlan: (type: ContentType, itemId: string) => boolean;
 
   // Enquiries
   enquiries: Enquiry[];
@@ -57,7 +48,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
     null
   );
   const [favorites, setFavorites] = useState<Favorite[]>([]);
-  const [tripPlan, setTripPlan] = useState<TripPlanItem[]>([]);
   const [enquiries, setEnquiries] = useState<Enquiry[]>([]);
   const [language, setLanguageState] = useState<'en' | 'de'>('en');
   const [uiSettings, setUiSettings] = useState<UISettings>(defaultUiSettings);
@@ -67,11 +57,10 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
   useEffect(() => {
     const initializeApp = async () => {
       try {
-        const [savedPrefs, savedFavs, savedTripPlan, savedLang, savedEnquiries, savedUiSettings] =
+        const [savedPrefs, savedFavs, savedLang, savedEnquiries, savedUiSettings] =
           await Promise.all([
             AsyncStorage.getItem('preferences'),
             AsyncStorage.getItem('favorites'),
-            AsyncStorage.getItem('tripPlan'),
             AsyncStorage.getItem('language'),
             AsyncStorage.getItem('enquiries'),
             AsyncStorage.getItem('uiSettings'),
@@ -79,7 +68,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
 
         if (savedPrefs) setPreferencesState(JSON.parse(savedPrefs));
         if (savedFavs) setFavorites(JSON.parse(savedFavs));
-        if (savedTripPlan) setTripPlan(JSON.parse(savedTripPlan));
         if (savedEnquiries) setEnquiries(JSON.parse(savedEnquiries));
         if (savedLang) setLanguageState(JSON.parse(savedLang));
         if (savedUiSettings) {
@@ -145,72 +133,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
     return favorites.some((fav) => fav.type === type && fav.itemId === itemId);
   };
 
-  const persistTripPlan = async (nextTripPlan: TripPlanItem[]) => {
-    setTripPlan(nextTripPlan);
-    await AsyncStorage.setItem('tripPlan', JSON.stringify(nextTripPlan));
-  };
-
-  const addTripItem = async (type: ContentType, itemId: string, day: number = 1) => {
-    try {
-      const existing = tripPlan.find(
-        (entry) => entry.type === type && entry.itemId === itemId
-      );
-
-      if (existing) {
-        return;
-      }
-
-      const nextTripPlan: TripPlanItem[] = [
-        ...tripPlan,
-        {
-          id: `${type}-${itemId}`,
-          type,
-          itemId,
-          day: Math.max(1, Math.round(day)),
-          addedAt: Date.now(),
-        },
-      ];
-
-      await persistTripPlan(nextTripPlan);
-    } catch (error) {
-      console.error('Failed to add trip plan item:', error);
-    }
-  };
-
-  const removeTripItem = async (id: string) => {
-    try {
-      const nextTripPlan = tripPlan.filter((entry) => entry.id !== id);
-      await persistTripPlan(nextTripPlan);
-    } catch (error) {
-      console.error('Failed to remove trip plan item:', error);
-    }
-  };
-
-  const updateTripItemDay = async (id: string, day: number) => {
-    try {
-      const normalizedDay = Math.max(1, Math.round(day));
-      const nextTripPlan = tripPlan.map((entry) =>
-        entry.id === id ? { ...entry, day: normalizedDay } : entry
-      );
-
-      await persistTripPlan(nextTripPlan);
-    } catch (error) {
-      console.error('Failed to update trip plan item day:', error);
-    }
-  };
-
-  const clearTripPlan = async () => {
-    try {
-      await persistTripPlan([]);
-    } catch (error) {
-      console.error('Failed to clear trip plan:', error);
-    }
-  };
-
-  const isInTripPlan = (type: ContentType, itemId: string): boolean => {
-    return tripPlan.some((entry) => entry.type === type && entry.itemId === itemId);
-  };
-
   const addEnquiry = async (enquiry: Enquiry) => {
     try {
       const updated = [...enquiries, enquiry];
@@ -250,12 +172,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
     addFavorite,
     removeFavorite,
     isFavorited,
-    tripPlan,
-    addTripItem,
-    removeTripItem,
-    updateTripItemDay,
-    clearTripPlan,
-    isInTripPlan,
     enquiries,
     addEnquiry,
     language,

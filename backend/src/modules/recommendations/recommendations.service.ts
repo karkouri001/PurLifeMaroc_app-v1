@@ -169,10 +169,6 @@ export class RecommendationsService {
           score += 30;
         }
 
-        if (this.matchesBudget(accommodation.pricePerNight, preferences.budget)) {
-          score += 22;
-        }
-
         return { accommodation, index, score };
       })
       .sort((first, second) => {
@@ -185,29 +181,9 @@ export class RecommendationsService {
       .map(({ accommodation }) => accommodation);
   }
 
-  private matchesBudget(pricePerNight: string, budget?: string): boolean {
-    if (!budget) {
-      return true;
-    }
-
-    const values = pricePerNight.match(/\d+/g)?.map(Number) || [];
-    const price = values.length === 0 ? 0 : values.length === 1 ? values[0] : Math.round((values[0] + values[1]) / 2);
-
-    if (budget === 'budget') {
-      return price <= 110;
-    }
-
-    if (budget === 'mid') {
-      return price >= 90 && price <= 190;
-    }
-
-    return price >= 170;
-  }
-
   private generateExplanation(preferences: CreateRecommendationDto): string {
     const styleName = preferences.travelStyle || 'custom';
     const durationText = preferences.duration || 'flexible';
-    const budgetText = preferences.budget || 'mid-range';
 
     const explanations: Record<string, string> = {
       curator:
@@ -224,6 +200,6 @@ export class RecommendationsService {
       explanations[styleName] ||
       'These selections build a more useful shortlist based on your profile.';
 
-    return `${baseExplanation} The result also reflects your ${durationText} trip length and ${budgetText} budget.`;
+    return `${baseExplanation} The result also reflects your ${durationText} trip length without exposing commercial ranges in the app.`;
   }
 }

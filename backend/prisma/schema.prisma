@@ -16,7 +16,6 @@ model Enquiry {
   destinations    Json
   startDate       String?
   duration        String?
-  budget          String?
   specialRequests String
   status          String   @default("NEW")
   source          String   @default("mobile-app")

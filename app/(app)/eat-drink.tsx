@@ -50,19 +50,18 @@ export default function EatDrinkScreen() {
         <HeroBanner
           eyebrow="Taste of Pur Life"
           title="Dining ideas, not reservation widgets"
-          description="The page stays guidance-first while still giving enough detail to compare culinary moods."
-          chips={['Seafood', 'Tagine', 'Fine dining']}
+          description="Dining references from the relaunch workbook, presented as concierge context rather than commercial checkout."
+          chips={['Caravane', 'Al Fassia', 'Le Doge']}
         />
 
         <View style={styles.cardsSection}>
           {restaurants.map((restaurant) => {
             const favorited = isFavorited('restaurant', restaurant.id);
+            const imageSource = getDiningImage(restaurant.image);
 
             return (
               <Card key={restaurant.id} variant="elevated">
-                {getDiningImage(restaurant.image) ? (
-                  <CardMedia source={getDiningImage(restaurant.image)} />
-                ) : null}
+                {imageSource ? <CardMedia source={imageSource} /> : null}
 
                 <View style={styles.cardHeader}>
                   <View style={{ flex: 1 }}>
@@ -91,8 +90,8 @@ export default function EatDrinkScreen() {
 
                 <View style={styles.footerRow}>
                   <View>
-                    <Text style={styles.label}>{t('eatDrink.priceRange')}</Text>
-                    <Text style={styles.priceValue}>{restaurant.priceRange}</Text>
+                    <Text style={styles.label}>Atmosphere</Text>
+                    <Text style={styles.atmosphereValue}>{restaurant.atmosphere}</Text>
                   </View>
 
                   <Button
@@ -173,7 +172,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  priceValue: {
+  atmosphereValue: {
     ...theme.typography.h5,
     color: theme.colors.primaryDark,
   },

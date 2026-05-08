@@ -22,7 +22,6 @@ import {
 import { Enquiry } from '../../src/types';
 import {
   buildPreferenceSignals,
-  getBudgetLabel,
   getDurationLabel,
 } from '../../src/utils/preferences';
 import { validationUtils } from '../../src/utils/helpers';
@@ -141,7 +140,7 @@ export default function EnquiryScreen() {
     }
 
     if (params.routeId) {
-      return `I would like more guidance about this itinerary.`;
+      return `I would like more guidance about this route idea.`;
     }
 
     if (params.driverId) {
@@ -165,7 +164,6 @@ export default function EnquiryScreen() {
     phone: '',
     startDate: '',
     duration: getDurationLabel(preferences?.duration ?? null, t) || '',
-    budget: getBudgetLabel(preferences?.budget ?? null, t) || '',
     specialRequests: prefilledMessage,
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -240,7 +238,6 @@ export default function EnquiryScreen() {
       destinations: getContextDestinations(),
       startDate: formData.startDate,
       duration: formData.duration,
-      budget: formData.budget,
       specialRequests: formData.specialRequests,
       createdAt: Date.now(),
     };
@@ -379,11 +376,6 @@ export default function EnquiryScreen() {
             locale === 'de' ? 'Duration idea' : 'Duration idea',
             'duration',
             locale === 'de' ? 'Example: 5 days' : 'Example: 5 days'
-          )}
-          {renderInput(
-            locale === 'de' ? 'Budget vibe' : 'Budget vibe',
-            'budget',
-            locale === 'de' ? 'Example: premium, flexible' : 'Example: premium, flexible'
           )}
         </Card>
 

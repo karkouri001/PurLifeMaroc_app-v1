@@ -49,12 +49,6 @@
     "title": "Tell Us About You",
     "subtitle": "Help us curate your perfect Morocco experience",
     "step1": "What's your travel style?",
-    "step2": "What's your budget?",
-    "budget": {
-      "budget": "Budget-Friendly",
-      "mid": "Mid-Range",
-      "luxury": "Luxury"
-    },
     "step3": "How long will you stay?",
     "duration": {
       "weekend": "Weekend (2-3 days)",
@@ -117,9 +111,8 @@
     "subtitle": "Curated Experiences",
     "noActivities": "No activities found",
     "duration": "Duration",
-    "price": "Price",
     "category": "Category",
-    "bookNow": "Add to Itinerary"
+    "bookNow": "Ask Concierge"
   },
   "accommodation": {
     "title": "Where to Stay",
@@ -129,7 +122,6 @@
     "camp": "Desert Camps",
     "traditional": "Traditional Houses",
     "amenities": "Amenities",
-    "pricePerNight": "Per Night",
     "selectRoom": "View Property"
   },
   "eatDrink": {
@@ -137,7 +129,6 @@
     "subtitle": "Moroccan Gastronomy",
     "cuisine": "Cuisine",
     "specialties": "Specialties",
-    "priceRange": "Price Range",
     "reserve": "Make Reservation",
     "noRestaurants": "No restaurants found"
   },
@@ -147,7 +138,7 @@
     "headline": "24/7 Dedicated Service",
     "description": "Our concierge team is available around the clock to assist you with any requests, special arrangements, or advice about your Moroccan journey.",
     "services": [
-      "Personalized Itinerary Planning",
+      "Personalized Concierge Guidance",
       "Restaurant Reservations",
       "Activity Bookings",
       "Transportation Arrangement",
@@ -194,7 +185,6 @@
     "selectedDestinations": "Selected Destinations",
     "startDate": "Preferred Start Date",
     "duration": "Duration",
-    "budget": "Budget Range",
     "specialRequests": "Special Requests",
     "requestText": "Tell us what you'd like to experience...",
     "submit": "Send Enquiry",
@@ -262,8 +252,6 @@
     "no-activities": "No Activities Found",
     "no-activities-found": "We couldn't find any activities matching your search",
     "activity-details": "Activity Details",
-    "add-to-itinerary": "Add to Itinerary",
-    "add-to-itinerary-message": "Add this activity to your custom itinerary",
     "ready-to-book": "Ready to book?",
     "accommodation": "Accommodation",
     "by-destination": "Accommodation by destination",
@@ -272,7 +260,6 @@
     "no-accommodation-found": "We couldn't find accommodation matching your criteria",
     "accommodation-details": "Accommodation Details",
     "amenities": "Amenities",
-    "price-per-night": "Price per Night",
     "interested": "Interested in this property?",
     "book-or-enquire": "Send us an enquiry to book or learn more",
     "view-property": "View Property",
@@ -306,8 +293,6 @@
     "enter-start-date-format": "e.g., 2024-05-15",
     "duration": "Duration",
     "e.g.-7-days": "e.g., 7 days",
-    "budget-range": "Budget Range",
-    "e.g.-3000-eur": "e.g., €3000",
     "your-preferences": "Your Preferences",
     "travel-style": "Travel Style",
     "not-selected": "Not selected",
@@ -320,7 +305,6 @@
     "phone-required": "Phone number is required",
     "date-required": "Start date is required",
     "duration-required": "Duration is required",
-    "budget-required": "Budget is required",
     "error": "Error",
     "failed-to-submit-enquiry": "Failed to submit enquiry. Please try again.",
     "next-step": "What Happens Next",
@@ -336,15 +320,13 @@
     "your-enquiry": "Your Enquiry Details",
     "full-name": "Full Name",
     "start-date": "Start Date",
-    "budget": "Budget",
-    "budget-range": "Budget Range",
     "what-happens-next": "What Happens Next",
     "review-step": "Review (24 hours)",
     "our-team-reviews": "Our team will carefully review your enquiry",
     "contact-step": "Contact You",
     "we-will-contact": "We'll reach out via your preferred contact method",
-    "finalize-step": "Finalize Itinerary",
-    "customize-finalize": "Together we'll customize and finalize your perfect itinerary",
+    "finalize-step": "Finalize Details",
+    "customize-finalize": "Together we'll shape the right service request for your Moroccan stay",
     "need-assistance": "Need Assistance?",
     "reach-out-anytime": "Reach out to our concierge anytime for support",
     "continue-exploring": "Continue Exploring",

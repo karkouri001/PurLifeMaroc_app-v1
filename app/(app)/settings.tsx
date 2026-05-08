@@ -103,8 +103,8 @@ export default function SettingsScreen() {
         <Card style={styles.infoCard}>
           <Text style={styles.infoTitle}>Pur Life Maroc Mobile App</Text>
           <Text style={styles.infoText}>
-            The app focuses on discovery, recommendations, saved items, trip planning,
-            budget guidance, and a concierge email flow.
+            The app focuses on Pur Life Maroc destinations, experiences, living
+            references, saved items, recommendations, and a concierge email flow.
           </Text>
           <Text style={[styles.infoText, styles.spacedInfoText]}>
             Choose the layout mode that feels best on your device from the display section above.

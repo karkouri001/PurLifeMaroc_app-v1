@@ -5,5 +5,11 @@ export class ContentSourceDto {
   source!: string;
 
   @ApiProperty()
+  wordpressBaseUrl!: string;
+
+  @ApiProperty()
+  fallbackSource!: string;
+
+  @ApiProperty()
   strategy!: string;
 }

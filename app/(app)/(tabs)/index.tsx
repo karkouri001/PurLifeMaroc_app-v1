@@ -23,6 +23,7 @@ import {
   privateChauffeurs,
   signatureItineraries,
 } from '../../../src/data/conciergeData';
+import { servicePillars, websiteSections } from '../../../src/data/websiteStructure';
 import { brandAssets } from '../../../src/data/imageAssets';
 import { insightsUtils } from '../../../src/utils/helpers';
 import { theme } from '../../../src/theme/theme';
@@ -34,18 +35,6 @@ const quickActions = [
     labelEn: 'Search',
     labelDe: 'Search',
     route: '/(app)/search',
-  },
-  {
-    id: 'planner',
-    labelEn: 'Trip planner',
-    labelDe: 'Trip planner',
-    route: '/(app)/trip-planner',
-  },
-  {
-    id: 'budget',
-    labelEn: 'Budget',
-    labelDe: 'Budget',
-    route: '/(app)/budget-estimator',
   },
   {
     id: 'destinations',
@@ -65,12 +54,24 @@ const quickActions = [
     labelDe: 'Unterkuenfte',
     route: '/(app)/accommodation-list',
   },
+  {
+    id: 'dining',
+    labelEn: 'Eat & Drink',
+    labelDe: 'Eat & Drink',
+    route: '/(app)/eat-drink',
+  },
+  {
+    id: 'contact',
+    labelEn: 'Contact',
+    labelDe: 'Kontakt',
+    route: '/(app)/enquiry',
+  },
 ];
 
 export default function HomeScreen() {
   const router = useRouter();
   const { i18n } = useTranslation();
-  const { favorites, tripPlan } = useAppContext();
+  const { favorites } = useAppContext();
   const insights = insightsUtils.generateMockInsights();
   const headerTopPadding = useTopSpacing(theme.spacing.lg);
   const layout = useResponsiveLayout({
@@ -89,9 +90,9 @@ export default function HomeScreen() {
       <View style={[styles.header, { paddingTop: headerTopPadding }]}>
         <View style={styles.headerBrand}>
           <Image source={brandAssets.logo} style={styles.logo} resizeMode="contain" />
-          <View>
-            <Text style={styles.kicker}>Pur Life Maroc</Text>
-            <Text style={styles.headerTitle}>Inside Morocco</Text>
+          <View style={styles.headerTextWrap}>
+            <Text style={styles.kicker}>Inside Morocco</Text>
+            <Text style={styles.headerTitle}>Pur Life Maroc</Text>
           </View>
         </View>
         <TouchableOpacity onPress={() => router.push('/(app)/settings' as never)}>
@@ -109,16 +110,16 @@ export default function HomeScreen() {
           }
           description={
             locale === 'de'
-              ? 'The app combines places, stays, routes, chauffeurs, and planning tools in one curated flow.'
-              : 'The app combines places, stays, routes, chauffeurs, and planning tools in one curated flow.'
+              ? 'Die App spiegelt die neue Website-Struktur: Erlebnisse, Pur Life Living, Marokko, Destinationen und Kontakt.'
+              : 'The app mirrors the new website structure: experiences, Pur Life Living, Morocco, destinations, and contact.'
           }
           accent="Warm, local, curated"
           imageSource={brandAssets.heroBanner}
           logoSource={brandAssets.logo}
           chips={[
             insights.topDestination.name,
-            insights.topItinerary.name,
-            `${tripPlan.length} ${locale === 'de' ? 'planned' : 'planned'}`,
+            'Private Concierge',
+            'Pur Life Living',
           ]}
         />
       </View>
@@ -126,7 +127,7 @@ export default function HomeScreen() {
       <View style={styles.metricsRow}>
         <StatChip label="Saved items" value={favorites.length.toString()} />
         <View style={styles.metricSpacer} />
-        <StatChip label="Planned items" value={tripPlan.length.toString()} />
+        <StatChip label="Website areas" value={websiteSections.length.toString()} />
       </View>
 
       <SectionHeader
@@ -153,8 +154,25 @@ export default function HomeScreen() {
       </View>
 
       <SectionHeader
+        title="PLM service pillars"
+        subtitle="From the relaunch navigation and brand notes"
+      />
+      <View style={styles.sectionContent}>
+        {servicePillars.map((pillar) => (
+          <Card key={pillar.id}>
+            <Text style={styles.itineraryTitle}>
+              {locale === 'de' ? pillar.titleDe : pillar.titleEn}
+            </Text>
+            <Text style={styles.itinerarySummary}>
+              {locale === 'de' ? pillar.textDe : pillar.textEn}
+            </Text>
+          </Card>
+        ))}
+      </View>
+
+      <SectionHeader
         title="Most explored now"
-        subtitle="Mock trends for the concierge product vision"
+        subtitle="Destinations kept in the website relaunch set"
         onViewAll={() => router.push('/(app)/insights' as never)}
       />
       <View style={styles.sectionContent}>
@@ -189,8 +207,8 @@ export default function HomeScreen() {
       </View>
 
       <SectionHeader
-        title="Popular routes"
-        subtitle="Tap into the detailed itinerary view"
+        title="Signature route ideas"
+        subtitle="Information-only route inspiration for concierge follow-up"
       />
       <View style={styles.sectionContent}>
         {signatureItineraries.map((itinerary) => (
@@ -281,18 +299,22 @@ const styles = StyleSheet.create({
     paddingRight: theme.spacing.md,
   },
   logo: {
-    width: 48,
-    height: 48,
-    marginRight: theme.spacing.md,
+    width: 64,
+    height: 64,
+    marginRight: theme.spacing.sm,
+  },
+  headerTextWrap: {
+    flex: 1,
   },
   kicker: {
     ...theme.typography.overline,
     color: theme.colors.primary,
-    marginBottom: theme.spacing.xs,
+    marginBottom: 1,
   },
   headerTitle: {
-    ...theme.typography.h2,
+    ...theme.typography.h4,
     color: theme.colors.textPrimary,
+    fontFamily: theme.fonts.display,
   },
   headerAction: {
     ...theme.typography.bodySmall,
@@ -319,10 +341,8 @@ const styles = StyleSheet.create({
     marginBottom: theme.spacing.xl,
   },
   quickCard: {
-    backgroundColor: theme.colors.surface,
-    borderRadius: theme.radius.xl,
-    borderWidth: 1,
-    borderColor: theme.colors.border,
+    backgroundColor: theme.colors.surfaceAlt,
+    borderRadius: theme.radius.md,
     padding: theme.spacing.lg,
     marginBottom: theme.spacing.md,
     minHeight: 112,

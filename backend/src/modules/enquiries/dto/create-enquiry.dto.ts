@@ -44,11 +44,6 @@ export class CreateEnquiryDto {
   @IsString()
   duration?: string;
 
-  @ApiPropertyOptional()
-  @IsOptional()
-  @IsString()
-  budget?: string;
-
   @ApiProperty()
   @IsString()
   @MinLength(5)

@@ -38,6 +38,7 @@ export default function DestinationsListScreen() {
 
   const renderDestination = ({ item }: { item: Destination }) => {
     const extra = destinationInsights[item.id as keyof typeof destinationInsights];
+    const imageSource = getDestinationImage(item.id);
 
     return (
       <TouchableOpacity
@@ -50,7 +51,7 @@ export default function DestinationsListScreen() {
         activeOpacity={0.8}
       >
         <Card>
-          {getDestinationImage(item.id) ? <CardMedia source={getDestinationImage(item.id)} /> : null}
+          {imageSource ? <CardMedia source={imageSource} /> : null}
           <Text style={styles.destinationName}>
             {locale === 'de' ? item.nameDe : item.nameEn}
           </Text>

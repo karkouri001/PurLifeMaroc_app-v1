@@ -10,7 +10,7 @@ import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { useTopSpacing } from '../../../src/components/AppChrome';
 import { Card, HeroBanner } from '../../../src/components/Common';
-import { signatureItineraries } from '../../../src/data/conciergeData';
+import { websiteSections } from '../../../src/data/websiteStructure';
 import { brandAssets } from '../../../src/data/imageAssets';
 import { theme } from '../../../src/theme/theme';
 import { useResponsiveLayout } from '../../../src/theme/responsive';
@@ -29,25 +29,9 @@ const exploreCategories: ExploreCategory[] = [
     id: 'search',
     titleEn: 'Search & Filters',
     titleDe: 'Search & Filters',
-    descriptionEn: 'Search across all core content with destination and budget filters.',
-    descriptionDe: 'Search across all core content with destination and budget filters.',
+    descriptionEn: 'Search across PLM destinations, experiences, stays, and dining references.',
+    descriptionDe: 'Suche in PLM-Destinationen, Erlebnissen, Unterkuenften und Dining-Referenzen.',
     route: '/(app)/search',
-  },
-  {
-    id: 'planner',
-    titleEn: 'Trip Planner',
-    titleDe: 'Trip Planner',
-    descriptionEn: 'Turn saved inspiration into a simple day-by-day route.',
-    descriptionDe: 'Turn saved inspiration into a simple day-by-day route.',
-    route: '/(app)/trip-planner',
-  },
-  {
-    id: 'budget',
-    titleEn: 'Budget Estimator',
-    titleDe: 'Budget Estimator',
-    descriptionEn: 'Preview a curated travel range before contacting the concierge.',
-    descriptionDe: 'Preview a curated travel range before contacting the concierge.',
-    route: '/(app)/budget-estimator',
   },
   {
     id: 'travel-styles',
@@ -128,6 +112,31 @@ export default function ExploreTab() {
           chips={['Destinations', 'Dining', 'Drivers']}
         />
 
+        <View style={styles.signatureSection}>
+          <Text style={styles.signatureTitle}>Website relaunch areas</Text>
+          {websiteSections.map((section) => (
+            <TouchableOpacity
+              key={section.id}
+              onPress={() => {
+                if (section.route) {
+                  router.push(section.route as never);
+                }
+              }}
+              activeOpacity={0.8}
+            >
+              <Card>
+                <Text style={styles.itineraryTitle}>
+                  {locale === 'de' ? section.titleDe : section.titleEn}
+                </Text>
+                <Text style={styles.itineraryDescription}>
+                  {locale === 'de' ? section.summaryDe : section.summaryEn}
+                </Text>
+                <Text style={styles.itineraryMeta}>{section.items.slice(0, 3).join(' | ')}</Text>
+              </Card>
+            </TouchableOpacity>
+          ))}
+        </View>
+
         <View style={styles.grid}>
           {exploreCategories.map((category) => (
             <TouchableOpacity
@@ -154,31 +163,6 @@ export default function ExploreTab() {
           ))}
         </View>
 
-        <View style={styles.signatureSection}>
-          <Text style={styles.signatureTitle}>Popular signature routes</Text>
-          {signatureItineraries.map((itinerary) => (
-            <TouchableOpacity
-              key={itinerary.id}
-              onPress={() =>
-                router.push({
-                  pathname: '/(app)/itinerary-details',
-                  params: { id: itinerary.id },
-                } as never)
-              }
-              activeOpacity={0.8}
-            >
-              <Card>
-                <Text style={styles.itineraryTitle}>
-                  {locale === 'de' ? itinerary.nameDe : itinerary.nameEn}
-                </Text>
-                <Text style={styles.itineraryDescription}>
-                  {locale === 'de' ? itinerary.summaryDe : itinerary.summaryEn}
-                </Text>
-                <Text style={styles.itineraryMeta}>{itinerary.duration}</Text>
-              </Card>
-            </TouchableOpacity>
-          ))}
-        </View>
       </ScrollView>
     </View>
   );

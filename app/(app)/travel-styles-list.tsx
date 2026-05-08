@@ -32,7 +32,6 @@ export default function TravelStylesListScreen() {
 
     const updated: UserPreferences = {
       travelStyle: selectedStyle,
-      budget: preferences?.budget ?? null,
       duration: preferences?.duration ?? null,
       interests: preferences?.interests ?? [],
       preferredDestinations: preferences?.preferredDestinations ?? [],

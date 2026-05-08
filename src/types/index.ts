@@ -32,7 +32,7 @@ export interface Activity {
   category: string;
   image: string;
   duration: string;
-  priceRange: string;
+  serviceNote: string;
 }
 
 // Accommodation
@@ -46,7 +46,7 @@ export interface Accommodation {
   category: 'luxury' | 'boutique' | 'camp' | 'traditional';
   image: string;
   amenities: string[];
-  pricePerNight: string;
+  stayStyle: string;
 }
 
 // Dining
@@ -60,7 +60,7 @@ export interface Restaurant {
   cuisine: string;
   image: string;
   specialties: string[];
-  priceRange: string;
+  atmosphere: string;
 }
 
 export interface DriverProfile {
@@ -98,7 +98,6 @@ export type ContentType =
 // User Preferences
 export interface UserPreferences {
   travelStyle: string | null;
-  budget: 'budget' | 'mid' | 'luxury' | null;
   duration: 'weekend' | 'week' | 'twoweeks' | 'month' | null;
   interests: string[];
   preferredDestinations: string[];
@@ -121,14 +120,6 @@ export interface Favorite {
   addedAt: number;
 }
 
-export interface TripPlanItem {
-  id: string;
-  type: ContentType;
-  itemId: string;
-  day: number;
-  addedAt: number;
-}
-
 export interface UISettings {
   extendIntoStatusBar: boolean;
 }
@@ -143,7 +134,6 @@ export interface Enquiry {
   destinations: string[];
   startDate: string;
   duration: string;
-  budget: string;
   specialRequests: string;
   createdAt: number;
 }
@@ -167,18 +157,73 @@ export interface InsightsData {
   trendingExperiences: { name: string; trend: number }[];
 }
 
-export interface BudgetEstimateLine {
-  id: string;
-  label: string;
-  minimum: number;
-  maximum: number;
-  note?: string;
+export type PreStayLanguage = 'en' | 'de';
+
+export interface PreStayGuest {
+  firstName: string;
+  lastName: string;
+  email: string;
 }
 
-export interface BudgetEstimate {
-  nights: number;
-  travelers: number;
-  lines: BudgetEstimateLine[];
-  totalMinimum: number;
-  totalMaximum: number;
+export interface PreStayReservation {
+  reference: string;
+  title: string;
+  status: string;
+  startDate: string;
+  endDate: string;
+  durationLabel: string;
+  destinations: string[];
+  travelersLabel: string;
+  managerName: string;
+  managerEmail: string;
+}
+
+export interface PreStayDay {
+  id: string;
+  labelEn: string;
+  labelDe: string;
+  titleEn: string;
+  titleDe: string;
+  textEn: string;
+  textDe: string;
+}
+
+export interface PreStayDocument {
+  id: string;
+  title: string;
+  type: string;
+  url?: string;
+}
+
+export interface PreStayServiceCard {
+  id: string;
+  titleEn: string;
+  titleDe: string;
+  textEn: string;
+  textDe: string;
+  actionEn: string;
+  actionDe: string;
+  route?: string;
+}
+
+export interface PreStayChecklistItem {
+  id: string;
+  titleEn: string;
+  titleDe: string;
+  textEn: string;
+  textDe: string;
+  done: boolean;
+}
+
+export interface PreStaySession {
+  token: string;
+  source: 'ezus' | 'mock';
+  language: PreStayLanguage;
+  guest: PreStayGuest;
+  reservation: PreStayReservation;
+  days: PreStayDay[];
+  documents: PreStayDocument[];
+  services: PreStayServiceCard[];
+  checklist: PreStayChecklistItem[];
+  generatedAt: string;
 }

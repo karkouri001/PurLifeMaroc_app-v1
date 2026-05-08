@@ -254,7 +254,7 @@ export class ChatbotService {
     }
 
     const list = related
-      .map((item) => `${this.language === 'de' ? item.nameDe : item.nameEn} (${item.pricePerNight})`)
+      .map((item) => `${this.language === 'de' ? item.nameDe : item.nameEn} (${item.stayStyle})`)
       .join(', ');
 
     return this.language === 'de'
@@ -296,8 +296,8 @@ export class ChatbotService {
     const description = this.language === 'de' ? activity.descriptionDe : activity.descriptionEn;
 
     return this.language === 'de'
-      ? `${name} in ${destinationName}: ${description} Dauer: ${activity.duration}. Preis: ${activity.priceRange}.`
-      : `${name} in ${destinationName}: ${description} Duration: ${activity.duration}. Price: ${activity.priceRange}.`;
+      ? `${name} in ${destinationName}: ${description} Dauer: ${activity.duration}. Hinweis: ${activity.serviceNote}.`
+      : `${name} in ${destinationName}: ${description} Duration: ${activity.duration}. Note: ${activity.serviceNote}.`;
   }
 
   private buildAccommodationResponse(text: string): string {
@@ -319,8 +319,8 @@ export class ChatbotService {
       this.language === 'de' ? accommodation.descriptionDe : accommodation.descriptionEn;
 
     return this.language === 'de'
-      ? `${name}: ${description} Preis pro Nacht: ${accommodation.pricePerNight}. Ausstattung: ${accommodation.amenities.slice(0, 4).join(', ')}.`
-      : `${name}: ${description} Price per night: ${accommodation.pricePerNight}. Amenities: ${accommodation.amenities.slice(0, 4).join(', ')}.`;
+      ? `${name}: ${description} Stil: ${accommodation.stayStyle}. Ausstattung: ${accommodation.amenities.slice(0, 4).join(', ')}.`
+      : `${name}: ${description} Style: ${accommodation.stayStyle}. Amenities: ${accommodation.amenities.slice(0, 4).join(', ')}.`;
   }
 
   private buildFoodResponse(text: string): string {
@@ -331,8 +331,8 @@ export class ChatbotService {
       const description = this.language === 'de' ? restaurant.descriptionDe : restaurant.descriptionEn;
 
       return this.language === 'de'
-        ? `${name}: ${description} Spezialitaeten: ${restaurant.specialties.slice(0, 3).join(', ')}. Preisrahmen: ${restaurant.priceRange}.`
-        : `${name}: ${description} Signature dishes: ${restaurant.specialties.slice(0, 3).join(', ')}. Price range: ${restaurant.priceRange}.`;
+        ? `${name}: ${description} Spezialitaeten: ${restaurant.specialties.slice(0, 3).join(', ')}. Atmosphaere: ${restaurant.atmosphere}.`
+        : `${name}: ${description} Signature dishes: ${restaurant.specialties.slice(0, 3).join(', ')}. Atmosphere: ${restaurant.atmosphere}.`;
     }
 
     const destination = this.matchDestination(text);

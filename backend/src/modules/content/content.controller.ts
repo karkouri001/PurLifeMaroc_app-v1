@@ -9,6 +9,7 @@ import {
   RestaurantDto,
   SignatureItineraryDto,
   TravelStyleDto,
+  WebsiteContentDto,
 } from './dto/content.dto';
 import { ContentSourceDto } from './dto/content-source.dto';
 import { ContentService } from './content.service';
@@ -23,6 +24,13 @@ export class ContentController {
   @ApiOkResponse({ type: ContentSourceDto })
   getSource() {
     return this.contentService.getSourceMetadata();
+  }
+
+  @Get('website')
+  @ApiOperation({ summary: 'Get reduced website content for the mobile app' })
+  @ApiOkResponse({ type: WebsiteContentDto })
+  getWebsiteContent() {
+    return this.contentService.getWebsiteContent();
   }
 
   @Get('travel-styles')

@@ -38,11 +38,11 @@ export default function AppLayout() {
       <Stack.Screen name="insights" />
       <Stack.Screen name="recommendations" />
       <Stack.Screen name="search" />
-      <Stack.Screen name="trip-planner" />
-      <Stack.Screen name="budget-estimator" />
       <Stack.Screen name="chatbot" />
       <Stack.Screen name="enquiry" />
       <Stack.Screen name="enquiry-summary" />
+      <Stack.Screen name="prestay-login" />
+      <Stack.Screen name="prestay-home" />
       <Stack.Screen name="settings" />
       <Stack.Screen name="itinerary-details" />
       <Stack.Screen name="chauffeur-details" />

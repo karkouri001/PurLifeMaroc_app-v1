@@ -28,8 +28,6 @@ export function useResponsiveLayout(options: ResponsiveLayoutOptions = {}) {
     const heroMinHeight =
       clamp(Math.round(width * 0.55), 200, 236) +
       (fontScale > 1.15 ? theme.spacing.lg : 0);
-    const heroGlowLargeSize = clamp(Math.round(width * 0.42), 136, 184);
-    const heroGlowSmallSize = clamp(Math.round(width * 0.26), 88, 114);
     const cardMediaHeight = clamp(Math.round(width * 0.48), 168, 206);
 
     return {
@@ -42,8 +40,6 @@ export function useResponsiveLayout(options: ResponsiveLayoutOptions = {}) {
       isCompact: width < 390,
       heroPadding,
       heroMinHeight,
-      heroGlowLargeSize,
-      heroGlowSmallSize,
       cardMediaHeight,
     };
   }, [fontScale, gap, horizontalPadding, minTwoColumnWidth, width]);

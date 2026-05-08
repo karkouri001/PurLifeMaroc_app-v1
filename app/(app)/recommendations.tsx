@@ -148,7 +148,7 @@ export default function RecommendationsScreen() {
           items={recommendations.accommodation.map((stay) => ({
             id: stay.id,
             title: locale === 'de' ? stay.nameDe : stay.nameEn,
-            subtitle: stay.pricePerNight,
+            subtitle: stay.stayStyle,
             onPress: () =>
               router.push({
                 pathname: '/(app)/accommodation-details',

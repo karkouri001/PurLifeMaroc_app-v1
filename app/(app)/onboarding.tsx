@@ -20,13 +20,11 @@ import {
 import {
   buildPreferenceUsageNotes,
   getAccommodationLabel,
-  getBudgetLabel,
   getDurationLabel,
   getTravelStyleLabel,
 } from '../../src/utils/preferences';
 
-type Step = 1 | 2 | 3 | 4 | 5 | 6 | 7;
-type Budget = 'budget' | 'mid' | 'luxury';
+type Step = 1 | 2 | 3 | 4 | 5 | 6;
 type Duration = 'weekend' | 'week' | 'twoweeks' | 'month';
 type Accommodation = 'luxury' | 'boutique' | 'camp' | 'traditional';
 
@@ -39,14 +37,13 @@ export default function OnboardingScreen() {
 
   const [prefs, setPrefs] = useState<UserPreferences>({
     travelStyle: null,
-    budget: null,
     duration: null,
     interests: [],
     preferredDestinations: [],
     accommodationPreference: null,
   });
 
-  const totalSteps = 7;
+  const totalSteps = 6;
 
   const handleNext = () => {
     if (step < totalSteps) {
@@ -89,24 +86,18 @@ export default function OnboardingScreen() {
           />
         )}
         {step === 2 && (
-          <BudgetStep
-            selected={prefs.budget}
-            onSelect={(budget) => setPrefs({ ...prefs, budget })}
-          />
-        )}
-        {step === 3 && (
           <DurationStep
             selected={prefs.duration}
             onSelect={(duration) => setPrefs({ ...prefs, duration })}
           />
         )}
-        {step === 4 && (
+        {step === 3 && (
           <InterestsStep
             selected={prefs.interests}
             onSelect={(interests) => setPrefs({ ...prefs, interests })}
           />
         )}
-        {step === 5 && (
+        {step === 4 && (
           <PreferredDestinationsStep
             destinationsList={destinations}
             language={i18n.language}
@@ -116,7 +107,7 @@ export default function OnboardingScreen() {
             }
           />
         )}
-        {step === 6 && (
+        {step === 5 && (
           <AccommodationStep
             selected={prefs.accommodationPreference}
             onSelect={(accommodationPreference) =>
@@ -124,7 +115,7 @@ export default function OnboardingScreen() {
             }
           />
         )}
-        {step === 7 && <SummaryStep preferences={prefs} />}
+        {step === 6 && <SummaryStep preferences={prefs} />}
       </ScrollView>
 
       <View style={styles.footer}>
@@ -185,46 +176,6 @@ function TravelStyleStep({
               </View>
               {selected === style.id && <Text style={styles.checkmark}>OK</Text>}
             </View>
-          </Card>
-        </TouchableOpacity>
-      ))}
-    </View>
-  );
-}
-
-function BudgetStep({
-  selected,
-  onSelect,
-}: {
-  selected: Budget | null;
-  onSelect: (budget: Budget) => void;
-}) {
-  const { t } = useTranslation();
-
-  const options: { id: Budget; label: string }[] = [
-    { id: 'budget', label: t('onboarding.budget.budget') },
-    { id: 'mid', label: t('onboarding.budget.mid') },
-    { id: 'luxury', label: t('onboarding.budget.luxury') },
-  ];
-
-  return (
-    <View>
-      <Text style={styles.stepTitle}>{t('onboarding.step2')}</Text>
-
-      {options.map((option) => (
-        <TouchableOpacity
-          key={option.id}
-          onPress={() => onSelect(option.id)}
-          activeOpacity={0.7}
-        >
-          <Card
-            style={[
-              styles.optionCard,
-              selected === option.id && styles.selectedCard,
-            ]}
-          >
-            <Text style={styles.optionTitle}>{option.label}</Text>
-            {selected === option.id && <Text style={styles.checkmark}>OK</Text>}
           </Card>
         </TouchableOpacity>
       ))}
@@ -437,7 +388,6 @@ function SummaryStep({ preferences }: { preferences: UserPreferences }) {
           : destination.nameEn
       );
 
-    const budgetLabel = getBudgetLabel(preferences.budget, t);
     const durationLabel = getDurationLabel(preferences.duration, t);
     const accommodationLabel = getAccommodationLabel(
       preferences.accommodationPreference,
@@ -446,9 +396,6 @@ function SummaryStep({ preferences }: { preferences: UserPreferences }) {
 
     if (selectedTravelStyle) {
       items.push(`${t('screens.travel-style')}: ${selectedTravelStyle}`);
-    }
-    if (budgetLabel) {
-      items.push(`${t('screens.budget')}: ${budgetLabel}`);
     }
     if (durationLabel) {
       items.push(`${t('screens.duration')}: ${durationLabel}`);

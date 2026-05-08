@@ -33,7 +33,6 @@ export class EnquiriesService {
         destinations: dto.destinations,
         startDate: dto.startDate,
         duration: dto.duration,
-        budget: dto.budget,
         specialRequests: dto.specialRequests,
       },
     });
